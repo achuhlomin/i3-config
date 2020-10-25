@@ -471,7 +471,7 @@ exec --no-startup-id "xrandr --output HDMI-0 --brightness 0.7"
 exec --no-startup-id obs
 exec --no-startup-id flameshot
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id sleep 7 ; thunderbird
+exec --no-startup-id sleep 5 ; thunderbird
 exec --no-startup-id xinput set-prop 13 299 -0.62
 exec --no-startup-id /opt/enpass/Enpass -minimize
 exec_always --no-startup-id setcursor
