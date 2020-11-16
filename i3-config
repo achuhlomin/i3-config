@@ -150,6 +150,10 @@ set $ws7 7.email
 set $ws8 8.pamac
 set $ws9 9
 
+# To get right key:
+#   xev > result            # press key "Scroll Lock" for example
+#   grep "Scroll" result    # so here you find key name ("Scroll_Lock")
+
 # switch to workspace
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
@@ -398,6 +402,9 @@ bindsym Shift+Print --release exec --no-startup-id flameshot full --path ~/Stora
 bindsym Shift+Ctrl+Print --release exec --no-startup-id flameshot full --clipboard --delay 3000
 bindsym Shift+$mod+Print --release exec --no-startup-id flameshot gui --path ~/Storage/Screenshots/ --delay 3000
 
+bindsym $mod+Scroll_Lock --release exec obs
+bindsym $mod+Pause --release exec killall obs
+
 # bindsym $mod+l exec --no-startup-id i3exit lock
 # bindsym $mod+l exec --no-startup-id i3exit switch_user, mode "default"
 # bindsym Shift+Print --release exec --no-startup-id deepin-screenshot --no-notification
@@ -468,17 +475,15 @@ exec --no-startup-id desktop-items
 exec --no-startup-id start_conky_maia
 exec --no-startup-id nitrogen --restore; sleep 1; compton -b
 exec --no-startup-id "xrandr --output HDMI-0 --brightness 0.7"
-exec --no-startup-id obs
 exec --no-startup-id flameshot
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id sleep 5 ; thunderbird
+exec --no-startup-id sleep 15; thunderbird
 exec --no-startup-id xinput set-prop 13 299 -0.62
 exec --no-startup-id /opt/enpass/Enpass -minimize
 exec_always --no-startup-id setcursor
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id g213-led -a 00ff00
-exec_always --no-startup-id sleep 10 ; killall -SIGUSR1 dunst && systemctl --user restart urserver && killall dunst && notify-send ""
-
+# exec --no-startup-id obs
 # exec --no-startup-id xautolock -time 10 -locker "i3exit switch_user" -notify 10000 -notifier "notify-send --expire-time=3000 'Warning! Session locking...'" -corners -000 -cornerdelay 30
 
 
