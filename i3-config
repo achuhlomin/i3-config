@@ -393,7 +393,7 @@ bindsym Mod1+Shift+e exec --no-startup-id /opt/enpass/Enpass
 bindsym $mod+Insert exec --no-startup-id notify-send 'vpn connecting...' | sudo protonvpn r && notify-send 'vpn connected'
 bindsym $mod+Delete exec --no-startup-id sudo protonvpn d && notify-send 'vpn disabled'
 bindsym $mod+Shift+z exec --no-startup-id timeshift-launcher
-bindsym $mod+l exec "sleep 0.3; xset dpms force off"
+bindsym $mod+XF86AudioMute exec "sleep 0.1; xset dpms force off"
 
 bindsym Print --release exec --no-startup-id flameshot full --path ~/Storage/Screenshots/
 bindsym Ctrl+Print --release exec --no-startup-id flameshot full --clipboard
@@ -405,6 +405,7 @@ bindsym Shift+$mod+Print --release exec --no-startup-id flameshot gui --path ~/S
 bindsym $mod+Scroll_Lock --release exec obs
 bindsym $mod+Pause --release exec killall obs
 
+# bindsym $mod+l exec "sleep 0.3; xset dpms force off"
 # bindsym $mod+l exec --no-startup-id i3exit lock
 # bindsym $mod+l exec --no-startup-id i3exit switch_user, mode "default"
 # bindsym Shift+Print --release exec --no-startup-id deepin-screenshot --no-notification
