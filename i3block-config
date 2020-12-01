@@ -89,9 +89,16 @@ SHORT_FORMAT="${SYMB} ${VOL}%"
 interval=once
 format=json
 markup=pango
-#min_width=50
-#align=center
+min_width=18
+align=center
 #DUNST_MUTE=off
+
+[nm-vpn]
+#init_color=#FFFF00
+#on_color=#00FF00
+label=VPN
+interval=5
+signal=14
 
 [time]
 command=date '+%d.%m %H:%M'

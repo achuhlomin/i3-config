@@ -381,7 +381,7 @@ bindsym $mod+F4 --release exec --no-startup-id calibre
 bindsym $mod+Shift+F4 --release exec --no-startup-id anki
 bindsym $mod+F5 --release exec --no-startup-id telegram-desktop
 bindsym $mod+Shift+F5 --release exec --no-startup-id skypeforlinux
-bindsym $mod+F6 --release exec --no-startup-id spotify
+# bindsym $mod+F6 --release exec --no-startup-id spotify
 bindsym $mod+Shift+F6 --release exec --no-startup-id audacious
 bindsym $mod+F7 --release exec --no-startup-id thunderbird
 bindsym $mod+F8 --release exec --no-startup-id pamac-manager
@@ -390,17 +390,17 @@ bindsym $mod+Shift+h exec xed ~/.i3/config
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 bindsym Mod1+Ctrl+e exec --no-startup-id /opt/enpass/Enpass showassistant
 bindsym Mod1+Shift+e exec --no-startup-id /opt/enpass/Enpass
-bindsym $mod+Insert exec --no-startup-id notify-send 'vpn connecting...' | sudo protonvpn r && notify-send 'vpn connected'
-bindsym $mod+Delete exec --no-startup-id sudo protonvpn d && notify-send 'vpn disabled'
+bindsym $mod+Insert exec --no-startup-id notify-send --expire-time=1500 'vpn connecting...' ; exec sudo protonvpn r && pkill -RTMIN+14 i3blocks
+bindsym $mod+Delete exec --no-startup-id sudo protonvpn d && pkill -RTMIN+14 i3blocks
 bindsym $mod+Shift+z exec --no-startup-id timeshift-launcher
-bindsym $mod+XF86AudioMute exec "sleep 0.1; xset dpms force off"
+bindsym $mod+XF86AudioMute exec "sleep 0.25; xset dpms force off"
 
 bindsym Print --release exec --no-startup-id flameshot full --path ~/Storage/Screenshots/
 bindsym Ctrl+Print --release exec --no-startup-id flameshot full --clipboard
 bindsym $mod+Print --release exec --no-startup-id flameshot gui --path ~/Storage/Screenshots/
-bindsym Shift+Print --release exec --no-startup-id flameshot full --path ~/Storage/Screenshots/ --delay 3000
-bindsym Shift+Ctrl+Print --release exec --no-startup-id flameshot full --clipboard --delay 3000
-bindsym Shift+$mod+Print --release exec --no-startup-id flameshot gui --path ~/Storage/Screenshots/ --delay 3000
+bindsym Shift+Print --release exec --no-startup-id flameshot full --path ~/Storage/Screenshots/ --delay 5000
+bindsym Shift+Ctrl+Print --release exec --no-startup-id flameshot full --clipboard --delay 5000
+bindsym Shift+$mod+Print --release exec --no-startup-id flameshot gui --path ~/Storage/Screenshots/ --delay 5000
 
 bindsym $mod+Scroll_Lock --release exec obs
 bindsym $mod+Pause --release exec killall obs
