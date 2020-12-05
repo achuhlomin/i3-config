@@ -1,6 +1,10 @@
 # i3 config file (v4)
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
+# To get right key:
+#   xev > result            # press key "Scroll Lock" for example
+#   grep "Scroll" result    # so here you find key name ("Scroll_Lock")
+
 # Mouse setup
 # xinput list
 #   id=9    
@@ -148,11 +152,7 @@ set $ws5 5.chats
 set $ws6 6.media
 set $ws7 7.email
 set $ws8 8.pamac
-set $ws9 9
-
-# To get right key:
-#   xev > result            # press key "Scroll Lock" for example
-#   grep "Scroll" result    # so here you find key name ("Scroll_Lock")
+set $ws9 9.obs
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -402,7 +402,7 @@ bindsym Shift+Print --release exec --no-startup-id flameshot full --path ~/Stora
 bindsym Shift+Ctrl+Print --release exec --no-startup-id flameshot full --clipboard --delay 5000
 bindsym Shift+$mod+Print --release exec --no-startup-id flameshot gui --path ~/Storage/Screenshots/ --delay 5000
 
-bindsym $mod+Scroll_Lock --release exec obs
+bindsym $mod+Scroll_Lock --release exec obs --startreplaybuffer
 bindsym $mod+Pause --release exec killall obs
 
 # bindsym $mod+l exec "sleep 0.3; xset dpms force off"
@@ -427,6 +427,7 @@ assign [class="Skype"] $ws5
 assign [class="Telegram"] $ws5
 assign [class="zoom"] $w5
 assign [class="Pamac"] $ws8
+assign [class="obs"] $ws9
 
 for_window [class="jetbrains-*"] floating disable
 for_window [class="code-oss"] move position center
@@ -481,10 +482,10 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id sleep 15; thunderbird
 exec --no-startup-id xinput set-prop 13 299 -0.62
 exec --no-startup-id /opt/enpass/Enpass -minimize
+exec --no-startup-id obs --startreplaybuffer
 exec_always --no-startup-id setcursor
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id g213-led -a 00ff00
-# exec --no-startup-id obs
 # exec --no-startup-id xautolock -time 10 -locker "i3exit switch_user" -notify 10000 -notifier "notify-send --expire-time=3000 'Warning! Session locking...'" -corners -000 -cornerdelay 30
 
 
