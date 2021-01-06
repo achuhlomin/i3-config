@@ -3,7 +3,7 @@
 - [config](i3_config) `~/.i3/config`  
 - [keyboard languages](gxkb.cfg) `~/.config/gxkb/gxkb.cfg `  
 - pulseaudio `/etc/pulse/daemon.conf`      
-- lock and exit config `/usr/bin/i3exit`  
+- exit config `/usr/bin/i3exit`  
 - status bars  
     + [i3blocks](i3blocks_config) `~/.config/i3blocks/config`
     + [i3status](i3status_config) `~/.config/i3status/config`    

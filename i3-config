@@ -1,10 +1,6 @@
 # i3 config file (v4)
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-# To get right key:
-#   xev > result            # press key "Scroll Lock" for example
-#   grep "Scroll" result    # so here you find key name ("Scroll_Lock")
-
 # Mouse setup
 # xinput list
 #   id=9    
