@@ -101,7 +101,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # workspace back and forth (with/without active container)
-workspace_auto_back_and_forth yes
+workspace_auto_back_and_forth no
 bindsym $mod+b workspace back_and_forth
 bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
 
@@ -428,6 +428,7 @@ assign [class="Pcmanfm"] $ws3
 assign [class="qBittorrent"] $ws3
 assign [class="Anki"] $ws9
 assign [class="obs"] $ws9
+assign [class="calibre"] $ws9
 assign [class="Skype"] $ws5
 assign [class="Telegram"] $ws5
 assign [class="zoom"] $ws5
@@ -437,7 +438,6 @@ for_window [class="URxvt"] move to workspace $ws4
 for_window [class="Audacious"] move to workspace $ws6
 for_window [class="Spotify"] move to workspace $ws6
 for_window [class="Thunderbird"] move to workspace $ws7
-for_window [class="calibre"] move to workspace $ws9
 for_window [class="jetbrains-*"] floating disable
 for_window [class="jetbrains-*" window_type="dialog" title="Open Project"] floating enable
 for_window [title="htop"] floating enable sticky enable border normal
@@ -485,7 +485,7 @@ exec --no-startup-id flameshot
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id xinput set-prop 13 299 -0.62
 exec --no-startup-id /opt/enpass/Enpass -minimize
-exec --no-startup-id minikube start -p anki-cluster
+# exec --no-startup-id minikube start -p anki-docker-cluster
 exec --no-startup-id thunderbird
 exec_always --no-startup-id setcursor
 exec_always --no-startup-id ff-theme-util
