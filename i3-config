@@ -7,7 +7,7 @@
 
 # Mouse setup
 # xinput list
-#   id=9    
+#   id=9
 # xinput list-props 9
 #   libinput Accel Speed (299)
 #   libinput Accel Profile Enabled (302)
@@ -153,8 +153,8 @@ set $ws4 4.tty
 set $ws5 5.chats
 set $ws6 6.media
 set $ws7 7.email
-set $ws8 8.pamac
-set $ws9 9.shelf
+set $ws8 8.shelf
+set $ws9 9.pamac
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -246,7 +246,7 @@ mode "resize" {
 # Change the variable name at the place you want to match the color
 # of your terminal like this:
 # [example]
-# If you want your bar to have the same background color as your 
+# If you want your bar to have the same background color as your
 # terminal background change the line 362 from:
 # background  #2B2C2B
 # to:
@@ -311,7 +311,7 @@ bindsym $mod+m bar mode toggle
   client.focused_inactive #2F3D44 #2F3D44 #1ABC9C #454948
   client.unfocused        #2F3D44 #2F3D44 #1ABC9C #454948
   client.urgent           #CB4B16 #FDF6E3 #1ABC9C #268BD2
-  client.placeholder      #000000 #0c0c0c #ffffff #000000 
+  client.placeholder      #000000 #0c0c0c #ffffff #000000
 
   client.background       #2B2C2B
 
@@ -387,11 +387,11 @@ bindsym $mod+Shift+F5 exec --no-startup-id skypeforlinux
 bindsym $mod+F6 exec --no-startup-id spotify
 bindsym $mod+Shift+F6 exec --no-startup-id audacious
 bindsym $mod+F7 exec --no-startup-id thunderbird
-bindsym $mod+F8 exec --no-startup-id pamac-manager
-bindsym $mod+F9 exec --no-startup-id calibre
-bindsym $mod+Shift+F9 exec --no-startup-id anki
+bindsym $mod+F8 exec --no-startup-id calibre
+bindsym $mod+Shift+F8 exec --no-startup-id anki
+bindsym $mod+F9 exec --no-startup-id pamac-manager
 bindsym $mod+Ctrl+b exec --no-startup-id terminal -e 'bmenu'
-bindsym $mod+Shift+h exec leafpad ~/.i3/config
+bindsym $mod+Shift+h exec howl ~/.i3/config
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 bindsym $mod_alt+Ctrl+e exec --no-startup-id /opt/enpass/Enpass showassistant
 bindsym $mod_alt+Shift+e exec --no-startup-id /opt/enpass/Enpass
@@ -426,24 +426,30 @@ assign [class="firefox"] $ws2
 assign [class="chrome"] $ws2
 assign [class="Pcmanfm"] $ws3
 assign [class="qBittorrent"] $ws3
-assign [class="Anki"] $ws9
-assign [class="obs"] $ws9
-assign [class="calibre"] $ws9
 assign [class="Skype"] $ws5
 assign [class="Telegram"] $ws5
 assign [class="zoom"] $ws5
-assign [class="Pamac"] $ws8
+assign [class="Anki"] $ws8
+assign [class="obs"] $ws8
+assign [class="calibre"] $ws8
+assign [class="Pamac"] $ws9
 
 for_window [class="URxvt"] move to workspace $ws4
 for_window [class="Audacious"] move to workspace $ws6
 for_window [class="Spotify"] move to workspace $ws6
 for_window [class="Thunderbird"] move to workspace $ws7
 for_window [class="jetbrains-*"] floating disable
+for_window [class="jetbrains-*" title="win0"] floating enable
 for_window [class="jetbrains-*" window_type="dialog" title="Open Project"] floating enable
+for_window [class="jetbrains-*" window_type="dialog" title="win*"] floating enable
 for_window [title="htop"] floating enable sticky enable border normal
 for_window [title="htop"] resize set height 800
 for_window [title="htop"] resize set width 1200
 for_window [title="htop"] move position center
+for_window [class="Howl"] floating enable
+for_window [class="Howl"] resize set height 800
+for_window [class="Howl"] resize set width 1200
+for_window [class="Howl"] move position center
 for_window [title="Enpass"] floating enable sticky enable
 for_window [title="alsamixer"] floating enable border pixel 1
 for_window [class="calamares"] floating enable border normal
@@ -461,8 +467,10 @@ for_window [title="MuseScore: Play Panel"] floating enable
 for_window [class="Nitrogen"] floating enable sticky enable border normal
 for_window [class="Oblogout"] fullscreen enable
 for_window [class="octopi"] floating enable
-for_window [class="Pamac-manager"] floating enable
-for_window [class="Pamac-updater"] floating enable
+for_window [class="Pamac-manager"] floating disable
+for_window [class="Pamac-updater"] floating disable
+for_window [class="Pamac-manager" window_type="dialog"] floating enable
+for_window [class="Pamac-updater" window_type="dialog"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Qtconfig-qt4"] floating enable border normal
 for_window [class="qt5ct"] floating enable sticky enable border normal
@@ -485,28 +493,14 @@ exec --no-startup-id flameshot
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id xinput set-prop 13 299 -0.62
 exec --no-startup-id /opt/enpass/Enpass -minimize
-# exec --no-startup-id minikube start -p anki-docker-cluster
-exec --no-startup-id thunderbird
+# Move to systemd as docker dependency
+#exec --no-startup-id minikube start -p anki-docker-cluster
 exec_always --no-startup-id setcursor
 exec_always --no-startup-id ff-theme-util
+# See also keyboard-g213-highlight.service
+exec_always --no-startup-id g213-led -a 00ff00
 
+#exec --no-startup-id thunderbird
 #exec --no-startup-id obs --startreplaybuffer
 #exec --no-startup-id xautolock -time 30 -locker "i3exit suspend" -notify 15 -notifier "notify-send --urgency=critical --expire-time=5000 'Warning! Suspending in 15sec...'" -corners -000 -cornerdelay 30
 # exec_always --no-startup-id "(for i in {1..600}; do sudo protonvpn d; pkill -RTMIN+14 i3blocks; sleep 1; ping -c1 www.google.com && break; done) &> /dev/null && (sudo protonvpn r; pkill -RTMIN+14 i3blocks; thunderbird)"
-
-# See keyboard-g213-highlight.service
-# exec_always --no-startup-id g213-led -a 00ff00
-
-
-
-
-
-
-
-
-
-
-
-
-
-
