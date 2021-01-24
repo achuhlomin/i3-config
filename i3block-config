@@ -41,9 +41,11 @@ sys_color=#fa8072
 min_width=11.11 11.11
 align=center
 
-[load_average]
-label=LOAD 
-interval=10
+[temperature]
+label=CPU 
+interval=1
+T_WARN=70
+T_CRIT=90
 
 [memory]
 label=RAM 
@@ -54,14 +56,15 @@ label=SWAP
 instance=swap
 interval=30
 
-[temperature]
-label=TEMP 
-interval=10
-T_WARN=70
-T_CRIT=90
+[disk]
+LABEL=HOME 
+DIR=/home/achuhlomin
+ALERT_LOW=10
+interval=30
 
 [disk]
-#DIR=$HOME
+LABEL=STORAGE 
+DIR=/home/achuhlomin/Storage
 ALERT_LOW=10
 interval=30
 

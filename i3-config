@@ -20,8 +20,11 @@ exec --no-startup-id xinput set-prop "$(xinput list | grep 'Logitech USB Optical
 set $mod Mod4
 set $mod_alt Mod1
 
-# set default desktop layout <stacking|tabbed|tiling> (default is tiling)
-workspace_layout tabbed
+# set default desktop layout <stacking|tabbed|default> (default is tiling)
+workspace_layout default
+
+# default_orientation horizontal|vertical|auto
+default_orientation vertical
 
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
 default_border pixel 1
@@ -395,9 +398,10 @@ bindsym $mod+Shift+h exec howl ~/.i3/config
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 bindsym $mod_alt+Ctrl+e exec --no-startup-id /opt/enpass/Enpass showassistant
 bindsym $mod_alt+Shift+e exec --no-startup-id /opt/enpass/Enpass
-bindsym $mod+Insert exec --no-startup-id "notify-send --expire-time=1500 'vpn connecting...' ; VBoxManage controlvm anki-cluster pause; sudo protonvpn connect --fastest && pkill -RTMIN+14 i3blocks"
-bindsym $mod+Delete exec --no-startup-id "sudo protonvpn disconnect ; pkill -RTMIN+14 i3blocks ; VBoxManage controlvm anki-cluster resume"
+bindsym $mod+Insert exec --no-startup-id "notify-send --expire-time=1500 'vpn connecting...' ; sudo protonvpn connect --fastest && pkill -RTMIN+14 i3blocks"
+bindsym $mod+Delete exec --no-startup-id "sudo protonvpn disconnect ; pkill -RTMIN+14 i3blocks"
 bindsym $mod+Shift+z exec --no-startup-id timeshift-launcher
+bindsym $mod_alt+Ctrl+v exec --no-startup-id xfce4-popup-clipman
 
 bindsym Print exec --no-startup-id flameshot full --path ~/Storage/Screenshots/
 bindsym Ctrl+Print exec --no-startup-id flameshot full --clipboard
@@ -426,6 +430,7 @@ assign [class="firefox"] $ws2
 assign [class="chrome"] $ws2
 assign [class="Pcmanfm"] $ws3
 assign [class="qBittorrent"] $ws3
+assign [class="URxvt"] $ws4
 assign [class="Skype"] $ws5
 assign [class="Telegram"] $ws5
 assign [class="zoom"] $ws5
@@ -434,10 +439,12 @@ assign [class="obs"] $ws8
 assign [class="calibre"] $ws8
 assign [class="Pamac"] $ws9
 
-for_window [class="URxvt"] move to workspace $ws4
+# https://i3wm.org/docs/userguide.html#command_criteria
+for_window [class="firefox"] layout tabbed
 for_window [class="Audacious"] move to workspace $ws6
 for_window [class="Spotify"] move to workspace $ws6
 for_window [class="Thunderbird"] move to workspace $ws7
+for_window [class="jetbrains-*"] layout tabbed
 for_window [class="jetbrains-*"] floating disable
 for_window [class="jetbrains-*" title="win0"] floating enable
 for_window [class="jetbrains-*" window_type="dialog" title="Open Project"] floating enable
@@ -481,14 +488,14 @@ for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
 
 # Autostart applications
-exec --no-startup-id gxkb
-exec --no-startup-id clipit
-exec --no-startup-id nm-applet
 exec --no-startup-id pamac-tray
+exec --no-startup-id gxkb
+exec --no-startup-id xfce4-clipman
+exec --no-startup-id nm-applet
 exec --no-startup-id desktop-items
 exec --no-startup-id start_conky_maia
 exec --no-startup-id nitrogen --restore; sleep 1; compton -b
-exec --no-startup-id "xrandr --output HDMI-0 --brightness 0.7"
+exec --no-startup-id "xrandr --output HDMI-0 --brightness 0.8"
 exec --no-startup-id flameshot
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id xinput set-prop 13 299 -0.62
