@@ -46,7 +46,7 @@ font xft:URWGothic-Book 11
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec "terminal; i3-msg 'workspace $ws3'"
+bindsym $mod+Return exec "terminal; i3-msg 'workspace $ws3'; wmctrl -a urxvt"
 bindsym $mod+Shift+Return exec terminal -e htop
 
 # kill focused window
@@ -151,7 +151,7 @@ bindsym $mod+Ctrl+Left workspace prev
 
 set $ws1 1.workspace
 set $ws2 2.browser
-set $ws3 3.tty
+set $ws3 3.debug
 set $ws4 4.file
 set $ws5 5.chats
 set $ws6 6.media
@@ -381,8 +381,8 @@ mode "$mode_gaps_outer" {
 # Applications controls
 bindsym $mod+F1 exec --no-startup-id idea
 bindsym $mod+F2 exec --no-startup-id firefox-developer-edition
-bindsym $mod+Shift+F2 exec --no-startup-id google-chrome-unstable
-bindsym $mod+F3 exec --no-startup-id "terminal; wmctrl -r urxvt -b add,demands_attention"
+bindsym $mod+F3 exec --no-startup-id google-chrome-unstable
+#bindsym $mod+F3 exec --no-startup-id "terminal; wmctrl -r urxvt -b add,demands_attention"
 bindsym $mod+F4 exec --no-startup-id pcmanfm
 bindsym $mod+Shift+F4 exec --no-startup-id pcmanfm_pkexec
 bindsym $mod+F5 exec --no-startup-id telegram-desktop
@@ -394,7 +394,7 @@ bindsym $mod+F8 exec --no-startup-id calibre
 bindsym $mod+Shift+F8 exec --no-startup-id anki
 bindsym $mod+F9 exec --no-startup-id pamac-manager
 bindsym $mod+Ctrl+b exec --no-startup-id terminal -e 'bmenu'
-bindsym $mod+Shift+h exec --no-startup-id terminal -e "vim /home/achuhlomin/.i3/config"
+bindsym $mod+Shift+h exec --no-startup-id terminal -e "nvim .i3/config"
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 bindsym $mod_alt+Ctrl+e exec --no-startup-id /opt/enpass/Enpass showassistant
 bindsym $mod_alt+Shift+e exec --no-startup-id /opt/enpass/Enpass
@@ -427,8 +427,8 @@ bindsym $mod+Pause exec killall obs
 assign [class="jetbrains-*"] $ws1
 assign [class="code-oss"] $ws1
 assign [class="firefox"] $ws2
-assign [class="chrome"] $ws2
-assign [class="URxvt"] $ws3
+assign [class="chrome"] $ws3
+assign [class="URxvt" title="^((?!(vim|nvim|htop)).)*$"] $ws3
 assign [class="Pcmanfm"] $ws4
 assign [class="qBittorrent"] $ws4
 assign [class="Skype"] $ws5
@@ -449,14 +449,18 @@ for_window [class="jetbrains-*"] floating disable
 for_window [class="jetbrains-*" title="win0"] floating enable
 for_window [class="jetbrains-*" window_type="dialog" title="Open Project"] floating enable
 for_window [class="jetbrains-*" window_type="dialog" title="win*"] floating enable
-for_window [title="htop"] floating enable sticky enable border normal
+for_window [class="jetbrains-*" window_type="dialog" title="Go to Line/Column"] floating enable
+for_window [title="htop"] floating enable
+#for_window [title="htop"] sticky enable
+for_window [title="htop"] border normal
 for_window [title="htop"] resize set height 800
 for_window [title="htop"] resize set width 1200
 for_window [title="htop"] move position center
-for_window [class="Howl"] floating enable
-for_window [class="Howl"] resize set height 800
-for_window [class="Howl"] resize set width 1200
-for_window [class="Howl"] move position center
+for_window [title="^(vim|nvim)$"] floating enable
+for_window [title="^(vim|nvim)$"] border normal
+for_window [title="^(vim|nvim)$"] resize set height 800
+for_window [title="^(vim|nvim)$"] resize set width 1200
+for_window [title="^(vim|nvim)$"] move position center
 for_window [title="Enpass"] floating enable sticky enable
 for_window [title="alsamixer"] floating enable border pixel 1
 for_window [class="calamares"] floating enable border normal
@@ -500,14 +504,12 @@ exec --no-startup-id flameshot
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id xinput set-prop 13 299 -0.62
 exec --no-startup-id /opt/enpass/Enpass -minimize
-# Move to systemd as docker dependency
-#exec --no-startup-id minikube start -p anki-docker-cluster
+exec --no-startup-id birdtray
 exec_always --no-startup-id setcursor
 exec_always --no-startup-id ff-theme-util
 # See also keyboard-g213-highlight.service
 exec_always --no-startup-id g213-led -a 00ff00
 
-#exec --no-startup-id thunderbird
 #exec --no-startup-id obs --startreplaybuffer
 #exec --no-startup-id xautolock -time 30 -locker "i3exit suspend" -notify 15 -notifier "notify-send --urgency=critical --expire-time=5000 'Warning! Suspending in 15sec...'" -corners -000 -cornerdelay 30
 # exec_always --no-startup-id "(for i in {1..600}; do sudo protonvpn d; pkill -RTMIN+14 i3blocks; sleep 1; ping -c1 www.google.com && break; done) &> /dev/null && (sudo protonvpn r; pkill -RTMIN+14 i3blocks; thunderbird)"
