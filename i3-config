@@ -447,9 +447,10 @@ for_window [class="Thunderbird"] move to workspace $ws7
 for_window [class="jetbrains-*"] layout tabbed
 for_window [class="jetbrains-*"] floating disable
 for_window [class="jetbrains-*" title="win0"] floating enable
-for_window [class="jetbrains-*" window_type="dialog" title="Open Project"] floating enable
 for_window [class="jetbrains-*" window_type="dialog" title="win*"] floating enable
+for_window [class="jetbrains-*" window_type="dialog" title="Open Project"] floating enable
 for_window [class="jetbrains-*" window_type="dialog" title="Go to Line/Column"] floating enable
+for_window [class="jetbrains-*" window_type="dialog" title="Copy"] floating enable
 for_window [title="htop"] floating enable
 #for_window [title="htop"] sticky enable
 for_window [title="htop"] border normal
