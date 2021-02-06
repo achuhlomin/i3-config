@@ -151,8 +151,8 @@ bindsym $mod+Ctrl+Left workspace prev
 
 set $ws1 1.workspace
 set $ws2 2.browser
-set $ws3 3.debug
-set $ws4 4.file
+set $ws3 3.tty
+set $ws4 4.fs
 set $ws5 5.chats
 set $ws6 6.media
 set $ws7 7.email
@@ -381,12 +381,12 @@ mode "$mode_gaps_outer" {
 # Applications controls
 bindsym $mod+F1 exec --no-startup-id idea
 bindsym $mod+F2 exec --no-startup-id firefox-developer-edition
-bindsym $mod+F3 exec --no-startup-id google-chrome-unstable
-#bindsym $mod+F3 exec --no-startup-id "terminal; wmctrl -r urxvt -b add,demands_attention"
+bindsym $mod+Shift+F2 exec --no-startup-id google-chrome-unstable
+bindsym $mod+F3 exec --no-startup-id "terminal; wmctrl -r urxvt -b add,demands_attention"
 bindsym $mod+F4 exec --no-startup-id pcmanfm
 bindsym $mod+Shift+F4 exec --no-startup-id pcmanfm_pkexec
 bindsym $mod+F5 exec --no-startup-id telegram-desktop
-bindsym $mod+Shift+F5 exec --no-startup-id skypeforlinux
+bindsym $mod+Shift+F5 exec --no-startup-id slack
 bindsym $mod+F6 exec --no-startup-id spotify
 bindsym $mod+Shift+F6 exec --no-startup-id audacious
 bindsym $mod+F7 exec --no-startup-id thunderbird
@@ -400,6 +400,7 @@ bindsym $mod_alt+Ctrl+e exec --no-startup-id /opt/enpass/Enpass showassistant
 bindsym $mod_alt+Shift+e exec --no-startup-id /opt/enpass/Enpass
 bindsym $mod+Insert exec --no-startup-id "notify-send --expire-time=1500 'vpn connecting...' ; sudo protonvpn connect --fastest && pkill -RTMIN+14 i3blocks"
 bindsym $mod+Delete exec --no-startup-id "sudo protonvpn disconnect ; pkill -RTMIN+14 i3blocks"
+bindsym $mod+Shift+Insert exec --no-startup-id gpclient
 bindsym $mod+Shift+z exec --no-startup-id timeshift-launcher
 bindsym $mod_alt+Ctrl+v exec --no-startup-id xfce4-popup-clipman
 
@@ -427,7 +428,7 @@ bindsym $mod+Pause exec killall obs
 assign [class="jetbrains-*"] $ws1
 assign [class="code-oss"] $ws1
 assign [class="firefox"] $ws2
-assign [class="chrome"] $ws3
+assign [class="chrome"] $ws2
 assign [class="URxvt" title="^((?!(vim|nvim|htop)).)*$"] $ws3
 assign [class="Pcmanfm"] $ws4
 assign [class="qBittorrent"] $ws4
@@ -441,22 +442,26 @@ assign [class="Pamac"] $ws9
 
 # https://i3wm.org/docs/userguide.html#command_criteria
 for_window [class="firefox"] layout tabbed
+for_window [class="Slack"] move to workspace $ws5
 for_window [class="Audacious"] move to workspace $ws6
 for_window [class="Spotify"] move to workspace $ws6
 for_window [class="Thunderbird"] move to workspace $ws7
+for_window [class="Thunderbird" window_type="dialog"] sticky enable
 for_window [class="jetbrains-*"] layout tabbed
 for_window [class="jetbrains-*"] floating disable
 for_window [class="jetbrains-*" title="win0"] floating enable
-for_window [class="jetbrains-*" window_type="dialog" title="win*"] floating enable
+for_window [class="jetbrains-*" window_type="dialog" title="^(win\d*)$"] floating enable
 for_window [class="jetbrains-*" window_type="dialog" title="Open Project"] floating enable
 for_window [class="jetbrains-*" window_type="dialog" title="Go to Line/Column"] floating enable
 for_window [class="jetbrains-*" window_type="dialog" title="Copy"] floating enable
 for_window [title="htop"] floating enable
-#for_window [title="htop"] sticky enable
+for_window [title="htop"] sticky enable
 for_window [title="htop"] border normal
 for_window [title="htop"] resize set height 800
 for_window [title="htop"] resize set width 1200
 for_window [title="htop"] move position center
+for_window [class="gpclient"] floating enable
+for_window [class="gpclient"] sticky enable
 for_window [title="^(vim|nvim)$"] floating enable
 for_window [title="^(vim|nvim)$"] border normal
 for_window [title="^(vim|nvim)$"] resize set height 800
@@ -505,7 +510,7 @@ exec --no-startup-id flameshot
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id xinput set-prop 13 299 -0.62
 exec --no-startup-id /opt/enpass/Enpass -minimize
-exec --no-startup-id birdtray
+exec_always --no-startup-id birdtray
 exec_always --no-startup-id setcursor
 exec_always --no-startup-id ff-theme-util
 # See also keyboard-g213-highlight.service
