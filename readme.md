@@ -18,20 +18,8 @@
 
 ### Status bars
 
-- `i3status` is default bar
 - `i3blocks` is rich for features so one is recommended
-
-#### i3status (default)
-
-~/.i3/config
-
-    ...
-    bar {
-        ...
-    	status_command i3status
-    }
-    
-~/.config/i3status/config
+- `i3status` is default bar
 
 #### i3blocks (recommended)
 
@@ -46,3 +34,15 @@
 ~/.config/i3blocks/config
 
 [see more on github.com/vivien/i3blocks](https://github.com/vivien/i3blocks)
+
+#### i3status (default)
+
+~/.i3/config
+
+    ...
+    bar {
+        ...
+    	status_command i3status
+    }
+    
+~/.config/i3status/config
