@@ -1,7 +1,7 @@
 ## i3
 
 - [config](i3_config) `~/.i3/config`  
-- [keyboard languages](gxkb.cfg) `~/.config/gxkb/gxkb.cfg `  
+- [keyboard languages](gxkb.cfg) `~/.config/gxkb/gxkb.cfg`  
 - pulseaudio `/etc/pulse/daemon.conf`      
 - exit config `/usr/bin/i3exit`  
 - status bars  

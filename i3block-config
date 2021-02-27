@@ -99,7 +99,7 @@ align=center
 [nm-vpn]
 #init_color=#FFFF00
 #on_color=#00FF00
-label=VPN
+label=VPN 
 interval=5
 signal=14
 
