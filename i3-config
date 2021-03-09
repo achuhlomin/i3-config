@@ -53,7 +53,7 @@ bindsym $mod+Shift+Return exec "kitty --title kitty-htop -e htop"
 bindsym $mod+Shift+q kill
 
 # start program launcher
-bindsym $mod+d exec --no-startup-id "rofi -combi-modi window,drun -show combi -modi combi -theme Arc-Dark"
+bindsym $mod+d exec --no-startup-id "rofi -combi-modi window,drun -show combi -modi combi -theme solarized_alternate"
 bindsym $mod+z exec --no-startup-id "wmfocus"
 
 # launch categorized menu
