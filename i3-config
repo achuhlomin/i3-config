@@ -46,17 +46,18 @@ font xft:URWGothic-Book 11
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec "terminal; i3-msg 'workspace $ws3'; wmctrl -a urxvt"
-bindsym $mod+Shift+Return exec terminal -e htop
+bindsym $mod+Return exec kitty
+bindsym $mod+Shift+Return exec "kitty --title kitty-htop -e htop"
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start program launcher
-bindsym $mod+d exec --no-startup-id dmenu_recency
+bindsym $mod+d exec --no-startup-id "rofi -combi-modi window,drun -show combi -modi combi -theme Arc-Dark"
+bindsym $mod+z exec --no-startup-id "wmfocus"
 
 # launch categorized menu
-bindsym $mod+z exec --no-startup-id morc_menu
+bindsym $mod+Shift+z exec --no-startup-id morc_menu
 
 # pulseaudio
 exec --no-startup-id start-pulseaudio-x11
@@ -243,37 +244,6 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
-# Color palette used for the terminal ( ~/.extend.Xresources file )
-# Colors are gathered based on the documentation:
-# https://i3wm.org/docs/userguide.html#xresources
-# Change the variable name at the place you want to match the color
-# of your terminal like this:
-# [example]
-# If you want your bar to have the same background color as your
-# terminal background change the line 362 from:
-# background  #2B2C2B
-# to:
-# background $term_background
-# Same logic applied to everything else.
-set_from_resource $term_background background
-set_from_resource $term_foreground foreground
-set_from_resource $term_color0     color0
-set_from_resource $term_color1     color1
-set_from_resource $term_color2     color2
-set_from_resource $term_color3     color3
-set_from_resource $term_color4     color4
-set_from_resource $term_color5     color5
-set_from_resource $term_color6     color6
-set_from_resource $term_color7     color7
-set_from_resource $term_color8     color8
-set_from_resource $term_color9     color9
-set_from_resource $term_color10    color10
-set_from_resource $term_color11    color11
-set_from_resource $term_color12    color12
-set_from_resource $term_color13    color13
-set_from_resource $term_color14    color14
-set_from_resource $term_color15    color15
-
 # Start i3bar to display a workspace bar
 bar {
 	i3bar_command i3bar
@@ -381,8 +351,8 @@ mode "$mode_gaps_outer" {
 # Applications controls
 bindsym $mod+F1 exec --no-startup-id idea
 bindsym $mod+F2 exec --no-startup-id firefox
-bindsym $mod+Shift+F2 exec --no-startup-id google-chrome-unstable
-bindsym $mod+F3 exec --no-startup-id "terminal; wmctrl -r urxvt -b add,demands_attention"
+bindsym $mod+Shift+F2 exec --no-startup-id google-chrome-stable
+bindsym $mod+F3 exec --no-startup-id "kitty bpytop" 
 bindsym $mod+F4 exec --no-startup-id pcmanfm
 bindsym $mod+Shift+F4 exec --no-startup-id pcmanfm_pkexec
 bindsym $mod+F5 exec --no-startup-id telegram-desktop
@@ -393,43 +363,30 @@ bindsym $mod+F7 exec --no-startup-id thunderbird
 bindsym $mod+F8 exec --no-startup-id calibre
 bindsym $mod+Shift+F8 exec --no-startup-id anki
 bindsym $mod+F9 exec --no-startup-id pamac-manager
-bindsym $mod+Ctrl+b exec --no-startup-id terminal -e 'bmenu'
-bindsym $mod+Shift+h exec --no-startup-id terminal -e "nvim .i3/config"
+bindsym $mod+Ctrl+b exec --no-startup-id "kitty 'bmenu'"
+bindsym $mod+Shift+h exec --no-startup-id "kitty --title kitty-nvim-i3-config -e nvim .i3/config"
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 bindsym $mod_alt+Ctrl+e exec --no-startup-id /opt/enpass/Enpass showassistant
 bindsym $mod_alt+Shift+e exec --no-startup-id /opt/enpass/Enpass
 bindsym $mod+Home exec --no-startup-id timeshift-launcher
-bindsym $mod+Insert exec --no-startup-id nmcli con up id IDT
-bindsym $mod+Shift+Insert exec --no-startup-id "notify-send --expire-time=1500 'vpn connecting...' ; sudo protonvpn c -f ; pkill -RTMIN+14 i3blocks"
+bindsym $mod+Insert exec --no-startup-id "notify-send --expire-time=1500 'vpn connecting...' ; sudo protonvpn c -f ; pkill -RTMIN+14 i3blocks"
+bindsym $mod+Shift+Insert exec --no-startup-id nmcli con up id IDT
 bindsym $mod+Delete exec --no-startup-id "nmcli con down id IDT ; pkill -RTMIN+14 i3blocks ; sudo protonvpn disconnect ; pkill -RTMIN+14 i3blocks"
 bindsym $mod_alt+Ctrl+v exec --no-startup-id xfce4-popup-clipman
-
 bindsym Print exec --no-startup-id flameshot full --path ~/Storage/Screenshots/
 bindsym Ctrl+Print exec --no-startup-id flameshot full --clipboard
 bindsym $mod+Print exec --no-startup-id flameshot gui --path ~/Storage/Screenshots/
 bindsym Shift+Print exec --no-startup-id flameshot full --path ~/Storage/Screenshots/ --delay 5000
 bindsym Shift+Ctrl+Print exec --no-startup-id flameshot full --clipboard --delay 5000
 bindsym Shift+$mod+Print exec --no-startup-id flameshot gui --path ~/Storage/Screenshots/ --delay 5000
-
 bindsym $mod+Scroll_Lock exec obs
 bindsym $mod+Pause exec killall obs
 
-# bindsym $mod+l exec "sleep 0.3; xset dpms force off"
-# bindsym $mod+l exec --no-startup-id i3exit lock
-# bindsym $mod+l exec --no-startup-id i3exit switch_user, mode "default"
-# bindsym Shift+Print exec --no-startup-id deepin-screenshot --no-notification
-# bindsym Print exec --no-startup-id deepin-screenshot --fullscreen
-# bindsym Print exec --no-startup-id i3-scrot
-# bindsym $mod+Print exec --no-startup-id i3-scrot -w
-# bindsym $mod+Shift+Print exec --no-startup-id i3-scrot -s
-# bindsym $mod+F1 exec --no-startup-id webstorm
-
 # Specify open applications
 assign [class="jetbrains-*"] $ws1
-assign [class="code-oss"] $ws1
 assign [class="firefox"] $ws2
 assign [class="chrome"] $ws2
-assign [class="URxvt" title="^((?!(vim|nvim|htop)).)*$"] $ws3
+assign [class="kitty" title="^((?!(kitty-nvim-i3-config|kitty-htop)).)*$"] $ws3
 assign [class="Pcmanfm"] $ws4
 assign [class="qBittorrent"] $ws4
 assign [class="Skype"] $ws5
@@ -455,19 +412,17 @@ for_window [class="jetbrains-*" window_type="dialog" title="^(win\d*)$"] floatin
 for_window [class="jetbrains-*" window_type="dialog" title="Open Project"] floating enable
 for_window [class="jetbrains-*" window_type="dialog" title="Go to Line/Column"] floating enable
 for_window [class="jetbrains-*" window_type="dialog" title="Copy"] floating enable
-for_window [title="htop"] floating enable
-for_window [title="htop"] sticky enable
-for_window [title="htop"] border normal
-for_window [title="htop"] resize set height 800
-for_window [title="htop"] resize set width 1200
-for_window [title="htop"] move position center
-for_window [class="gpclient"] floating enable
-for_window [class="gpclient"] sticky enable
-for_window [title="^(vim|nvim)$"] floating enable
-for_window [title="^(vim|nvim)$"] border normal
-for_window [title="^(vim|nvim)$"] resize set height 800
-for_window [title="^(vim|nvim)$"] resize set width 1200
-for_window [title="^(vim|nvim)$"] move position center
+for_window [title="kitty-htop"] floating enable
+for_window [title="kitty-htop"] sticky enable
+for_window [title="kitty-htop"] border normal
+for_window [title="kitty-htop"] resize set height 800
+for_window [title="kitty-htop"] resize set width 1200
+for_window [title="kitty-htop"] move position center
+for_window [title="^(kitty-nvim-i3-config)$"] floating enable
+for_window [title="^(kitty-nvim-i3-config)$"] border normal
+for_window [title="^(kitty-nvim-i3-config)$"] resize set height 800
+for_window [title="^(kitty-nvim-i3-config)$"] resize set width 1200
+for_window [title="^(kitty-nvim-i3-config)$"] move position center
 for_window [title="Enpass"] floating enable sticky enable
 for_window [title="alsamixer"] floating enable border pixel 1
 for_window [class="calamares"] floating enable border normal
@@ -511,12 +466,9 @@ exec --no-startup-id flameshot
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id xinput set-prop 13 299 -0.62
 exec --no-startup-id /opt/enpass/Enpass -minimize
-exec_always --no-startup-id birdtray
+exec --no-startup-id "kitty bpytop"
+exec --no-startup-id birdtray
 exec_always --no-startup-id setcursor
 exec_always --no-startup-id ff-theme-util
 # See also keyboard-g213-highlight.service
-exec_always --no-startup-id g213-led -a 00ff00
-
-#exec --no-startup-id obs --startreplaybuffer
-#exec --no-startup-id xautolock -time 30 -locker "i3exit suspend" -notify 15 -notifier "notify-send --urgency=critical --expire-time=5000 'Warning! Suspending in 15sec...'" -corners -000 -cornerdelay 30
-# exec_always --no-startup-id "(for i in {1..600}; do sudo protonvpn d; pkill -RTMIN+14 i3blocks; sleep 1; ping -c1 www.google.com && break; done) &> /dev/null && (sudo protonvpn r; pkill -RTMIN+14 i3blocks; thunderbird)"
+exec_always --no-startup-id "g213-led -a 00ff00"
