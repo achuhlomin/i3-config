@@ -9,13 +9,13 @@
 
 ### Rofi
 
-[](https://github.com/davatorium/rofi/tree/next/themes)
+[Rofi Themes](https://github.com/davatorium/rofi/tree/next/themes)
 
     rofi -combi-modi window,drun -show combi -modi combi -theme solarized_alternate
 
 ### Kitty
 
-[](https://github.com/dexpota/kitty-themes)
+[Kitty Themes](https://github.com/dexpota/kitty-themes)
 
     # ~/.config/kitty/kitty.conf
     include ./theme.conf

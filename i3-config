@@ -53,7 +53,7 @@ bindsym $mod+Shift+Return exec "kitty --title kitty-htop -e htop"
 bindsym $mod+Shift+q kill
 
 # start program launcher
-bindsym $mod+d exec --no-startup-id "rofi -combi-modi window,drun -show combi -modi combi -theme solarized_alternate"
+bindsym $mod+d exec --no-startup-id "rofi -combi-modi window,drun -show combi -modi combi -theme android_notification"
 bindsym $mod+z exec --no-startup-id "wmfocus"
 
 # launch categorized menu
@@ -346,7 +346,7 @@ mode "$mode_gaps_outer" {
 }
 
 # switch to workspace with urgent window automatically
-# for_window [urgent=latest] focus
+for_window [urgent=latest] focus
 
 # Applications controls
 bindsym $mod+F1 exec --no-startup-id idea
@@ -459,14 +459,13 @@ exec --no-startup-id gxkb
 exec --no-startup-id xfce4-clipman
 exec --no-startup-id nm-applet
 exec --no-startup-id desktop-items
-exec --no-startup-id start_conky_maia
+#exec --no-startup-id start_conky_maia
 exec --no-startup-id nitrogen --restore; sleep 1; compton -b
 exec --no-startup-id "xrandr --output HDMI-0 --brightness 0.85"
 exec --no-startup-id flameshot
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id xinput set-prop 13 299 -0.62
 exec --no-startup-id /opt/enpass/Enpass -minimize
-exec --no-startup-id "kitty bpytop"
 exec --no-startup-id birdtray
 exec_always --no-startup-id setcursor
 exec_always --no-startup-id ff-theme-util
