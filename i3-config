@@ -61,7 +61,8 @@ bindsym $mod+Shift+z exec --no-startup-id morc_menu
 
 # pulseaudio
 exec --no-startup-id start-pulseaudio-x11
-bindsym $mod+Ctrl+m exec pavucontrol
+#bindsym $mod+Ctrl+m exec pavucontrol
+bindsym $mod+Ctrl+m exec pavucontrol-qt
 
 # Screen brightness controls
 bindsym XF86AudioMute --release exec "xset dpms force off"
@@ -351,7 +352,7 @@ for_window [urgent=latest] focus
 # Applications controls
 bindsym $mod+F1 exec --no-startup-id idea
 bindsym $mod+F2 exec --no-startup-id firefox
-bindsym $mod+Shift+F2 exec --no-startup-id google-chrome-stable
+bindsym $mod+Shift+F3 exec --no-startup-id google-chrome-stable
 bindsym $mod+F3 exec --no-startup-id "kitty bpytop" 
 bindsym $mod+F4 exec --no-startup-id pcmanfm
 bindsym $mod+Shift+F4 exec --no-startup-id pcmanfm_pkexec
@@ -385,7 +386,7 @@ bindsym $mod+Pause exec killall obs
 # Specify open applications
 assign [class="jetbrains-*"] $ws1
 assign [class="firefox"] $ws2
-assign [class="chrome"] $ws2
+assign [class="chrome"] $ws3
 assign [class="kitty" title="^((?!(kitty-nvim-i3-config|kitty-htop)).)*$"] $ws3
 assign [class="Pcmanfm"] $ws4
 assign [class="qBittorrent"] $ws4
@@ -467,6 +468,8 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id xinput set-prop 13 299 -0.62
 exec --no-startup-id /opt/enpass/Enpass -minimize
 exec --no-startup-id birdtray
+# TODO move to service
+exec --no-startup-id "while sleep 0.1; do pacmd set-source-volume alsa_input.pci-0000_00_1f.3.analog-stereo 65535; done"
 exec_always --no-startup-id setcursor
 exec_always --no-startup-id ff-theme-util
 # See also keyboard-g213-highlight.service
