@@ -400,8 +400,6 @@ assign [class="Pamac"] $ws9
 
 # https://i3wm.org/docs/userguide.html#command_criteria
 for_window [class="firefox"] layout tabbed
-for_window [title="firefox"] resize set height 800
-for_window [title="firefox"] resize set width 1200
 for_window [class="Slack"] move to workspace $ws5
 for_window [class="Audacious"] move to workspace $ws6
 for_window [class="Spotify"] move to workspace $ws6
