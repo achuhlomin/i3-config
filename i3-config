@@ -13,8 +13,8 @@
 #   libinput Accel Profile Enabled (302)
 # exec --no-startup-id xinput set-prop 12 299 -0.5
 # exec --no-startup-id xinput set-prop 12 302 0, 1
-exec --no-startup-id xinput set-prop "$(xinput list | grep 'Logitech USB Optical Mouse' | awk '{print $7}' | tr -d 'id=')" "$(xinput list-props "$(xinput list | grep 'Logitech USB Optical Mouse' | awk '{print $7}' | sed 's/id=//')" | grep 'libinput Accel Speed (' | awk '{print $4}' | tr -d [:punct:])" -0.62
-exec --no-startup-id xinput set-prop "$(xinput list | grep 'Logitech USB Optical Mouse' | awk '{print $7}' | tr -d 'id=')" "$(xinput list-props "$(xinput list | grep 'Logitech USB Optical Mouse' | awk '{print $7}' | sed 's/id=//')" | grep 'libinput Accel Profile Enabled (' | awk '{print $5}' | tr -d [:punct:])" 0, 1
+exec_always --no-startup-id xinput set-prop "$(xinput list | grep 'Logitech USB Optical Mouse' | awk '{print $7}' | tr -d 'id=')" "$(xinput list-props "$(xinput list | grep 'Logitech USB Optical Mouse' | awk '{print $7}' | sed 's/id=//')" | grep 'libinput Accel Speed (' | awk '{print $4}' | tr -d [:punct:])" -0.62
+exec_always --no-startup-id xinput set-prop "$(xinput list | grep 'Logitech USB Optical Mouse' | awk '{print $7}' | tr -d 'id=')" "$(xinput list-props "$(xinput list | grep 'Logitech USB Optical Mouse' | awk '{print $7}' | sed 's/id=//')" | grep 'libinput Accel Profile Enabled (' | awk '{print $5}' | tr -d [:punct:])" 0, 1
 
 # Set mod key (Mod1=<Alt>, Mod4=<Super>)
 set $mod Mod4
@@ -54,7 +54,7 @@ bindsym $mod+Shift+q kill
 
 # start program launcher
 bindsym $mod+d exec --no-startup-id "rofi -combi-modi window,drun -show combi -modi combi -theme android_notification"
-bindsym $mod+z exec --no-startup-id "wmfocus"
+bindsym $mod+x exec --no-startup-id "wmfocus"
 
 # launch categorized menu
 bindsym $mod+Shift+z exec --no-startup-id morc_menu
@@ -353,7 +353,7 @@ for_window [urgent=latest] focus
 bindsym $mod+F1 exec --no-startup-id idea
 bindsym $mod+F2 exec --no-startup-id firefox
 bindsym $mod+F3 exec --no-startup-id google-chrome-stable
-bindsym $mod+Shift+F3 exec --no-startup-id "kitty bpytop" 
+bindsym $mod+Ctrl+Return exec --no-startup-id "kitty bpytop" 
 bindsym $mod+F4 exec --no-startup-id pcmanfm
 bindsym $mod+Shift+F4 exec --no-startup-id pcmanfm_pkexec
 bindsym $mod+F5 exec --no-startup-id telegram-desktop
@@ -387,7 +387,7 @@ bindsym $mod+Pause exec killall obs
 assign [class="jetbrains-*"] $ws1
 assign [class="firefox"] $ws2
 assign [class="chrome"] $ws3
-assign [class="kitty" title="^((?!(kitty-nvim-i3-config|kitty-htop)).)*$"] $ws3
+#assign [class="kitty" title="^((?!(kitty-nvim-i3-config|kitty-htop)).)*$"] $ws3
 assign [class="Pcmanfm"] $ws4
 assign [class="qBittorrent"] $ws4
 assign [class="Skype"] $ws5
@@ -413,6 +413,12 @@ for_window [class="jetbrains-*" window_type="dialog" title="^(win\d*)$"] floatin
 for_window [class="jetbrains-*" window_type="dialog" title="Open Project"] floating enable
 for_window [class="jetbrains-*" window_type="dialog" title="Go to Line/Column"] floating enable
 for_window [class="jetbrains-*" window_type="dialog" title="Copy"] floating enable
+for_window [title="kitty"] floating enable
+for_window [title="kitty"] sticky enable
+for_window [title="kitty"] border normal
+for_window [title="kitty"] resize set height 800
+for_window [title="kitty"] resize set width 1200
+for_window [title="kitty"] move position center
 for_window [title="kitty-htop"] floating enable
 for_window [title="kitty-htop"] sticky enable
 for_window [title="kitty-htop"] border normal
