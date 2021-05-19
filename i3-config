@@ -352,6 +352,7 @@ for_window [urgent=latest] focus
 # Applications controls
 bindsym $mod+F1 exec --no-startup-id idea
 bindsym $mod+F2 exec --no-startup-id firefox
+bindsym $mod+Shift+F2 exec --no-startup-id qutebrowser
 bindsym $mod+F3 exec --no-startup-id google-chrome-stable
 bindsym $mod+Ctrl+Return exec --no-startup-id "kitty bpytop" 
 bindsym $mod+F4 exec --no-startup-id pcmanfm
@@ -386,6 +387,7 @@ bindsym $mod+Pause exec killall obs
 # Specify open applications
 assign [class="jetbrains-*"] $ws1
 assign [class="firefox"] $ws2
+assign [class="qutebrowser"] $ws2
 assign [class="chrome"] $ws3
 #assign [class="kitty" title="^((?!(kitty-nvim-i3-config|kitty-htop)).)*$"] $ws3
 assign [class="Pcmanfm"] $ws4
@@ -463,7 +465,6 @@ for_window [class="pavucontrol-qt"] floating enable border pixel 1 move position
 
 # Autostart applications
 exec --no-startup-id pamac-tray
-exec --no-startup-id gxkb
 exec --no-startup-id xfce4-clipman
 exec --no-startup-id nm-applet
 exec --no-startup-id desktop-items
@@ -477,6 +478,7 @@ exec --no-startup-id /opt/enpass/Enpass -minimize
 exec --no-startup-id birdtray
 # TODO move to service
 exec --no-startup-id "while sleep 0.1; do pacmd set-source-volume alsa_input.pci-0000_00_1f.3.analog-stereo 65535; done"
+exec_always --no-startup-id gxkb
 exec_always --no-startup-id setcursor
 exec_always --no-startup-id ff-theme-util
 # See also keyboard-g213-highlight.service
