@@ -5,7 +5,7 @@
     setxkbmap -layout us,ru -option grp:caps_toggle
     sbxkb
 
-### Variant 2: gxkb (gxkb.cfg)
+### Variant 2: gxkb (~/.config/gxkb/gxkb.cfg)
 
     [xkb config]
     group_policy=2

@@ -1,5 +1,7 @@
-/* about:support > Profile Directory */
-/* /home/achuhlomin/.mozilla/firefox/bfezmc3g.default-release-1613458634215/chrome */
+/* 1. Open `about:config`, and change the value of toolkit.legacyUserProfileCustomizations.stylesheets to true.*/
+/* 2. Locate config directory: about:support > Profile Directory */
+/* 3. Create folder/file: chrome/userChrome.css */
+/* 4. Copy this file there */
 
 #TabsToolbar {
   visibility: collapse;
