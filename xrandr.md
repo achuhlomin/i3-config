@@ -6,7 +6,7 @@
     $ autorandr --save mobile
 
     # Connect an additional display, configure your setup and save it:
-    $ autorandr --save docked
+    $ autorandr --save docked-nvidia
 
     # Now autorandr can detect which hardware setup is active:
     $ autorandr
