@@ -1,6 +1,4 @@
-## Apps
-
-### Enpass
+## Enpass
 
 [Enpass looks too small or big on my display](https://www.enpass.io/support/kb/troubleshooting/enpass-looks-too-small-or-big-on-my-display-how-can-i-fix-it/)
 
