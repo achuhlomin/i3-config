@@ -1,16 +1,8 @@
-# This file is a modified version based on default i3-config-wizard config
-# source is available here:
-# https://raw.githubusercontent.com/endeavouros-team/endeavouros-i3wm-setup/master/.config/i3/config
-# Maintainer: joekamprad [joekamprad@endeavouros.com] 
-# https://endeavouros.com
-#
-# --> to update this run the following command (will backup existing setup file)
-# wget --backups=1 https://raw.githubusercontent.com/endeavouros-team/endeavouros-i3wm-setup/main/.config/i3/config -P ~/.config/i3/
-
 # Endeavouros-i3 config file
 # Source for complete framework of our i3 config and theming here: https://github.com/endeavouros-team/endeavouros-i3wm-setup
 # EndeavourOS wiki holds some Information also: https://endeavouros.com/docs/window-tiling-managers/i3-wm/
 # Please see http://i3wm.org/docs/userguide.html for the official i3 reference!
+
 
 #######################
 # config starts here: #
@@ -26,6 +18,7 @@ font pango:Noto Sans Regular 10
 set $mod Mod4
 set $alt Mod1
 
+
 ################
 # mouse setup: #
 ################
@@ -35,6 +28,7 @@ set $alt Mod1
 # exec --no-startup-id xinput set-prop 12 302 0, 1
 exec_always --no-startup-id xinput set-prop "$(xinput list | grep 'Logitech USB Optical Mouse' | awk '{print $7}' | tr -d 'id=')" "$(xinput list-props "$(xinput list | grep 'Logitech USB Optical Mouse' | awk '{print $7}' | sed 's/id=//')" | grep 'libinput Accel Speed (' | awk '{print $4}' | tr -d [:punct:])" -0.65
 exec_always --no-startup-id xinput set-prop "$(xinput list | grep 'Logitech USB Optical Mouse' | awk '{print $7}' | tr -d 'id=')" "$(xinput list-props "$(xinput list | grep 'Logitech USB Optical Mouse' | awk '{print $7}' | sed 's/id=//')" | grep 'libinput Accel Profile Enabled (' | awk '{print $5}' | tr -d [:punct:])" 0, 1
+
 
 #####################
 # workspace layout: #
@@ -50,6 +44,7 @@ workspace_layout default
 # i3 tabbed layout:
 # Each new window will open fullscreen as a tab (left to right)
 #workspace_layout tabbed
+
 
 ##############################
 # extra options for windows: #
@@ -164,6 +159,7 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
+
 
 ######################################
 # keybindings for different actions: #
@@ -304,6 +300,7 @@ bindsym $alt+Ctrl+e exec --no-startup-id enpass showassistant
 bindsym $alt+Shift+e exec --no-startup-id enpass
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 bindsym $mod+Shift+h exec --no-startup-id xfce4-terminal -e "nvim /home/achuhlomin/.config/i3/config"
+bindsym $mod+x exec --no-startup-id wmfocus
 
 
 ##########################################
@@ -352,6 +349,7 @@ assign [class="Xfce4-terminal"] $ws10
 for_window [class=Xfce4-terminal] focus
 for_window [class=Thunderbird] focus
 for_window [class=TelegramDesktop] focus
+
 
 #############################################
 # autostart applications/services on login: #
@@ -406,6 +404,7 @@ exec_always --no-startup-id autorandr --change
 # see also keyboard-g213-highlight.service
 exec_always --no-startup-id "g213-led -a 00ff00"
 
+
 #########################
 # setup window behavior #
 ######################### 
@@ -425,6 +424,7 @@ for_window [class="jetbrains-*" window_type="dialog" title="Copy"] floating enab
 
 for_window [class="(?i)firefox"] layout tabbed
 for_window [class="(?i)google-chrome"] layout tabbed
+
 
 ######################################
 # color settings for bar and windows #
@@ -515,6 +515,7 @@ strip_workspace_numbers yes
 #		urgent_workspace	$urgentred	$urgentred	$white		$purple 
 #	}
 #}
+
 
 #####################################
 # application menu handled by rofi: #
