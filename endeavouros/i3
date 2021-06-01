@@ -51,14 +51,21 @@ workspace_layout default
 ##############################
 
 #border indicator on windows: 
-new_window pixel 1
+new_window pixel 2
 
 # thin borders
-# hide_edge_borders both
+#hide_edge_borders both
 
 # Set inner/outer gaps
 gaps inner 8
 gaps outer 4
+
+# Smart gaps (gaps used if only more than one container on the workspace)
+#smart_gaps on
+
+# Smart borders (draw borders around container only if it is not the only container on this workspace)
+# on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
+#smart_borders on
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -301,6 +308,9 @@ bindsym $alt+Shift+e exec --no-startup-id enpass
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 bindsym $mod+Shift+h exec --no-startup-id xfce4-terminal -e "nvim /home/achuhlomin/.config/i3/config"
 bindsym $mod+x exec --no-startup-id wmfocus
+bindsym $alt+Ctrl+z exec --no-startup-id dunstctl history-pop
+bindsym $alt+Ctrl+space exec --no-startup-id dunstctl close-all
+bindsym $alt+Ctrl+v exec --no-startup-id CM_LAUNCHER=rofi clipmenu -p 'clipboard'
 
 
 ##########################################
@@ -394,12 +404,10 @@ exec --no-startup-id xset s 480 dpms 600 600 600
 # desktop notifications
 exec --no-startup-id dbus-launch dunst --config ~/.config/dunst/dunstrc
 
-# autostart apps as you like
+## autostart apps as you like
 exec --no-startup-id gxkb
 exec --no-startup-id /opt/enpass/Enpass -minimize
 exec --no-startup-id birdtray
-
-# autostart (always)
 exec_always --no-startup-id autorandr --change
 # see also keyboard-g213-highlight.service
 exec_always --no-startup-id "g213-led -a 00ff00"
@@ -423,7 +431,6 @@ for_window [class="jetbrains-*" window_type="dialog" title="Go to Line/Column"] 
 for_window [class="jetbrains-*" window_type="dialog" title="Copy"] floating enable
 
 for_window [class="(?i)firefox"] layout tabbed
-for_window [class="(?i)google-chrome"] layout tabbed
 
 
 ######################################
@@ -516,6 +523,7 @@ strip_workspace_numbers yes
 #	}
 #}
 
+bindsym $mod+m bar mode toggle
 
 #####################################
 # application menu handled by rofi: #
