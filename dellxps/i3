@@ -61,14 +61,16 @@ gaps inner 8
 gaps outer 4
 
 # Smart gaps (gaps used if only more than one container on the workspace)
-#smart_gaps on
+smart_gaps on
 
 # Smart borders (draw borders around container only if it is not the only container on this workspace)
 # on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
-#smart_borders on
+smart_borders on
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
+
+focus_follows_mouse no
 
 # switch to workspace
 bindsym $mod+1    workspace  $ws1
@@ -237,8 +239,18 @@ bindsym $mod+Shift+space floating toggle
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
+# toggle sticky
+bindsym $mod+Shift+s sticky toggle
+
 # focus the parent container
 bindsym $mod+a focus parent
+
+# move the currently focused window to the scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+minus scratchpad show
 
 # open new empty workspace
 bindsym $mod+Shift+n exec ~/.config/i3/scripts/empty_workspace.sh
@@ -246,7 +258,6 @@ bindsym $mod+Shift+n exec ~/.config/i3/scripts/empty_workspace.sh
 ## Multimedia Keys
 
 # brightness control
-# Backlight control
 bindsym XF86MonBrightnessUp exec --no-startup-id xrandr --output eDP-1-1 --brightness $(echo "$(bc <<< "$(xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1) + 0.1") 1" | tr ' ' "\n" | sort -n | head -1) && pkill -RTMIN+13 i3blocks
 bindsym XF86MonBrightnessDown exec --no-startup-id xrandr --output eDP-1-1 --brightness $(echo "$(bc <<< "$(xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1) - 0.1") 0.1" | tr ' ' "\n" | sort -nr | head -1) && pkill -RTMIN+13 i3blocks
 bindsym $mod+XF86AudioRaiseVolume exec --no-startup-id xrandr --output DP-1-2 --brightness $(echo "$(bc <<< "$(xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1) + 0.1") 1" | tr ' ' "\n" | sort -n | head -1) && pkill -RTMIN+13 i3blocks
@@ -291,10 +302,10 @@ bindsym $mod+F7 exec --no-startup-id obs --minimize-to-tray
 bindsym $mod+$alt+F7 exec --no-startup-id killall obs
 
 ## autorandr
-bindsym $mod+F9 exec --no-startup-id autorandr --load laptop-only-nvidia
-bindsym $mod+Shift+F9 exec --no-startup-id autorandr --load laptop-main-nvidia
-bindsym $mod+F10 exec --no-startup-id autorandr --load desktop-only-nvidia
-bindsym $mod+Shift+F10 exec --no-startup-id autorandr --load desktop-main-nvidia
+bindsym $mod+F9 exec --no-startup-id autorandr --load desktop-only-nvidia
+bindsym $mod+F10 exec --no-startup-id autorandr --load desktop-main-nvidia
+bindsym $mod+F11 exec --no-startup-id autorandr --load laptop-only-nvidia
+bindsym $mod+F12 exec --no-startup-id autorandr --load laptop-main-nvidia
 
 ## app shortcuts
 bindsym $mod+F1 exec --no-startup-id idea
@@ -309,7 +320,6 @@ bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 bindsym $mod+Shift+h exec --no-startup-id xfce4-terminal -e "nvim /home/achuhlomin/.config/i3/config"
 bindsym $mod+x exec --no-startup-id wmfocus
 bindsym $alt+Ctrl+z exec --no-startup-id dunstctl history-pop
-bindsym $alt+Ctrl+space exec --no-startup-id dunstctl close-all
 bindsym $alt+Ctrl+v exec --no-startup-id CM_LAUNCHER=rofi clipmenu -p 'clipboard'
 
 
@@ -345,9 +355,11 @@ workspace $ws8 output DP-1-2
 workspace $ws9 output eDP-1-1
 workspace $ws10 output DP-1-2
 
-# bind program to workspace and focus to them on startup:
-assign [class="(?i)firefox"] $ws2
-assign [class="(?i)google-chrome"] $ws3
+## bind program to workspace and focus to them on startup:
+assign [class="jetbrains-*"] $ws1
+assign [class="firefox"] $ws2
+assign [class="qutebrowser"] $ws2
+assign [class="chrome"] $ws3
 assign [class="Thunderbird"] $ws4
 assign [class="Slack"] $ws5
 assign [class="TelegramDesktop"] $ws5
@@ -383,9 +395,7 @@ exec --no-startup-id dex -a -s /etc/xdg/autostart/:~/.config/autostart/
 # start a script to setup displays
 # uncomment the next line, use arandr to setup displays and save the file as monitor:
 #exec --no-startup-id ~/.screenlayout/monitor.sh
-
-# start blueman app for managing bluetooth devices from tray:
-#exec --no-startup-id blueman-applet
+exec_always --no-startup-id autorandr --change
 
 # transparency 
 #exec --no-startup-id xcompmgr -c -C -t-5 -l-5 -r4.2 -o.55 &
@@ -408,14 +418,11 @@ exec --no-startup-id dbus-launch dunst --config ~/.config/dunst/dunstrc
 exec --no-startup-id gxkb
 exec --no-startup-id /opt/enpass/Enpass -minimize
 exec --no-startup-id birdtray
-exec_always --no-startup-id autorandr --change
 # see also keyboard-g213-highlight.service
 exec_always --no-startup-id "g213-led -a 00ff00"
 
-
-#########################
-# setup window behavior #
-######################### 
+## setup window behavior
+for_window [class="firefox"] layout tabbed
 for_window [class="Yad" instance="yad"] floating enable
 for_window [class="Galculator" instance="galculator"] floating enable
 #for_window [class=Xfce4-terminal] floating enable
@@ -429,8 +436,6 @@ for_window [class="jetbrains-*" window_type="dialog" title="^(win\d*)$"] floatin
 for_window [class="jetbrains-*" window_type="dialog" title="Open Project"] floating enable
 for_window [class="jetbrains-*" window_type="dialog" title="Go to Line/Column"] floating enable
 for_window [class="jetbrains-*" window_type="dialog" title="Copy"] floating enable
-
-for_window [class="(?i)firefox"] layout tabbed
 
 
 ######################################
