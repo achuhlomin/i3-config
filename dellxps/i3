@@ -61,7 +61,7 @@ gaps inner 8
 gaps outer 4
 
 # Smart gaps (gaps used if only more than one container on the workspace)
-smart_gaps on
+#smart_gaps on
 
 # Smart borders (draw borders around container only if it is not the only container on this workspace)
 # on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
@@ -281,8 +281,8 @@ bindsym Shift+XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Mas
 # mute
 bindsym XF86AudioMute exec --no-startup-id amixer -D pulse sset Master toggle && pkill -RTMIN+1 i3blocks
 
-bindsym XF86AudioPlay exec --no-startup-id playerctl play
-bindsym XF86AudioPause exec --no-startup-id playerctl pause
+bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
+bindsym XF86AudioStop exec --no-startup-id playerctl pause
 bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 
@@ -319,8 +319,8 @@ bindsym $alt+Shift+e exec --no-startup-id enpass
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 bindsym $mod+Shift+h exec --no-startup-id xfce4-terminal -e "nvim /home/achuhlomin/.config/i3/config"
 bindsym $mod+x exec --no-startup-id wmfocus
-bindsym $alt+Ctrl+z exec --no-startup-id dunstctl history-pop
-bindsym $alt+Ctrl+v exec --no-startup-id CM_LAUNCHER=rofi clipmenu -p 'clipboard'
+bindsym $mod+z exec --no-startup-id dunstctl history-pop
+bindsym $alt+Ctrl+space exec --no-startup-id dunstctl close-all
 
 
 ##########################################
@@ -337,7 +337,7 @@ set $ws4  "4:"
 set $ws5  "5:"
 set $ws6  "6:"
 set $ws7  "7:"
-set $ws8  "8"
+set $ws8  "8:"
 set $ws9  "9:"
 set $ws10 "10:"
 
@@ -419,7 +419,8 @@ exec --no-startup-id gxkb
 exec --no-startup-id /opt/enpass/Enpass -minimize
 exec --no-startup-id birdtray
 # see also keyboard-g213-highlight.service
-exec_always --no-startup-id "g213-led -a 00ff00"
+exec_always --no-startup-id "g213-led -a 533473"
+exec_always --no-startup-id xrandr --output eDP-1-1 --brightness 1
 
 ## setup window behavior
 for_window [class="firefox"] layout tabbed
@@ -531,17 +532,17 @@ strip_workspace_numbers yes
 bindsym $mod+m bar mode toggle
 
 #####################################
-# application menu handled by rofi: #
+# menu handled by rofi: #
 #####################################
 
-## rofi bindings fancy application menu (two bindings F9/$mod+d)
+bindsym $mod+d exec rofi -modi drun -show drun -display-drun "Apps" -line-padding 4 \
+  -columns 2 -padding 50 -hide-scrollbar \
+  -show-icons -drun-icon-theme "Arc-X-D" -font "Noto Sans Regular 11"
 
-bindsym $mod+d exec rofi -modi drun -show drun -display-drun "Apps : " -line-padding 4 \
-                -columns 2 -padding 50 -hide-scrollbar \
-                -show-icons -drun-icon-theme "Arc-X-D" -font "Noto Sans Regular 11"
-
-## rofi bindings for window menu (two bindings F10/$mod+t)
-
-bindsym $mod+w exec rofi -show window -display-window "Window : " -line-padding 4 \
-                -lines 10 -padding 50 -hide-scrollbar \
-                -show-icons -drun-icon-theme "Arc-X-D" -font "Noto Sans Regular 11"
+bindsym $mod+w exec rofi -show window -display-window "Window" -line-padding 4 \
+  -lines 15 -padding 50 -hide-scrollbar \
+  -show-icons -drun-icon-theme "Arc-X-D" -font "Noto Sans Regular 11"
+                
+bindsym $alt+Ctrl+v exec --no-startup-id CM_LAUNCHER=rofi CM_HISTLENGTH=25 clipmenu -p 'Clipboard' -line-padding 2 \
+  -padding 50 -hide-scrollbar \
+  -show-icons -drun-icon-theme "Arc-X-D" -font "Noto Sans Regular 11"
