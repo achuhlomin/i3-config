@@ -53,6 +53,7 @@ bindsym $mod+Shift+Return exec "kitty --title kitty-htop -e htop"
 bindsym $mod+Shift+q kill
 
 # start program launcher
+bindsym $mod+Shift+d exec --no-startup-id "rofi -show calc -modi calc -no-show-match -no-sort -theme android_notification -calc-command \\"echo '{result}' | xclip\\""
 bindsym $mod+d exec --no-startup-id "rofi -combi-modi window,drun -show combi -modi combi -theme android_notification"
 bindsym $mod+x exec --no-startup-id "wmfocus"
 
@@ -347,7 +348,7 @@ mode "$mode_gaps_outer" {
 }
 
 # switch to workspace with urgent window automatically
-for_window [urgent=latest] focus
+# for_window [urgent=latest] focus
 
 # Applications controls
 bindsym $mod+F1 exec --no-startup-id idea
@@ -478,7 +479,7 @@ exec --no-startup-id /opt/enpass/Enpass -minimize
 exec --no-startup-id birdtray
 # TODO move to service
 exec --no-startup-id "while sleep 0.1; do pacmd set-source-volume alsa_input.pci-0000_00_1f.3.analog-stereo 65535; done"
-exec_always --no-startup-id gxkb
+exec --no-startup-id gxkb
 exec_always --no-startup-id setcursor
 exec_always --no-startup-id ff-theme-util
 # See also keyboard-g213-highlight.service
