@@ -335,8 +335,8 @@ set $ws4  "4:"
 set $ws5  "5:"
 set $ws6  "6:"
 set $ws7  "7:"
-set $ws8  "8:"
-set $ws9  "9:"
+set $ws8  "8:"
+set $ws9  "9:"
 set $ws10 "10:"
 
 # use workspaces on different displays:
@@ -349,8 +349,8 @@ workspace $ws4 output primary
 workspace $ws5 output primary
 workspace $ws6 output primary
 workspace $ws7 output primary
-workspace $ws8 output primary
-workspace $ws9 output nonprimary
+workspace $ws8 output nonprimary
+workspace $ws9 output primary
 workspace $ws10 output primary
 
 ## bind program to workspace and focus to them on startup:
@@ -363,6 +363,7 @@ assign [class="Slack"] $ws5
 assign [class="TelegramDesktop"] $ws5
 assign [class="Thunar"] $ws6
 assign [class="obs"] $ws7
+for_window [class="Spotify"] move to workspace $ws7
 assign [class="Xfce4-terminal"] $ws10
 
 # automatic set focus new window if it opens on another workspace then the current:
@@ -417,7 +418,7 @@ exec --no-startup-id gxkb
 exec --no-startup-id /opt/enpass/Enpass -minimize
 exec_always --no-startup-id sleep 7; birdtray
 # see also keyboard-g213-highlight.service
-exec_always --no-startup-id "g213-led -a 533473"
+exec_always --no-startup-id "g213-led -a 9649cc"
 exec_always --no-startup-id xrandr --output eDP-1-1 --brightness 1
 
 ## setup window behavior
