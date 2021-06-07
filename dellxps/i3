@@ -332,7 +332,7 @@ bindsym Shift+$mod+Print exec --no-startup-id flameshot gui --path ~/Screenshots
 
 ## obs
 bindsym $mod+F7 exec --no-startup-id obs --minimize-to-tray
-bindsym $mod+$alt+F7 exec --no-startup-id killall obs
+bindsym $mod+End exec --no-startup-id killall obs
 
 ## autorandr
 bindsym $mod+F9 exec --no-startup-id autorandr --load desktop-only-nvidia
@@ -344,9 +344,9 @@ bindsym $mod+F12 exec --no-startup-id autorandr --load laptop-main-nvidia
 bindsym $mod+F1 exec --no-startup-id idea
 bindsym $mod+F2 exec --no-startup-id firefox
 bindsym $mod+F3 exec --no-startup-id google-chrome-stable
-bindsym $mod+F4 exec --no-startup-id thunderbird
-bindsym $mod+F5 exec --no-startup-id slack
-bindsym $mod+F6 exec --no-startup-id thunar
+bindsym $mod+F4 exec --no-startup-id thunar
+bindsym $mod+F5 exec --no-startup-id thunderbird
+bindsym $mod+F6 exec --no-startup-id slack
 bindsym $alt+Ctrl+e exec --no-startup-id enpass showassistant
 bindsym $alt+Shift+e exec --no-startup-id enpass
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
@@ -367,9 +367,9 @@ set $ws0  "0:"
 set $ws1  "1:"
 set $ws2  "2:"
 set $ws3  "3:"
-set $ws4  "4:"
-set $ws5  "5:"
-set $ws6  "6:"
+set $ws4  "4:"
+set $ws5  "5:"
+set $ws6  "6:"
 set $ws7  "7:"
 set $ws8  "8:"
 set $ws9  "9:"
@@ -394,10 +394,10 @@ assign [class="jetbrains-*"] $ws1
 assign [class="firefox"] $ws2
 assign [class="qutebrowser"] $ws2
 assign [class="chrome"] $ws3
-assign [class="Thunderbird"] $ws4
-assign [class="Slack"] $ws5
-assign [class="TelegramDesktop"] $ws5
-assign [class="Thunar"] $ws6
+assign [class="Thunar"] $ws4
+assign [class="Thunderbird"] $ws5
+assign [class="Slack"] $ws6
+assign [class="TelegramDesktop"] $ws6
 assign [class="obs"] $ws7
 for_window [class="Spotify"] move to workspace $ws7
 assign [class="Xfce4-terminal"] $ws10
@@ -454,7 +454,7 @@ exec --no-startup-id gxkb
 exec --no-startup-id /opt/enpass/Enpass -minimize
 exec_always --no-startup-id sleep 7; birdtray
 # see also keyboard-g213-highlight.service
-exec_always --no-startup-id "g213-led -a 9649cc"
+exec_always --no-startup-id "g213-led -a 3e7ab3"
 exec_always --no-startup-id xrandr --output eDP-1-1 --brightness 1
 exec_always --no-startup-id xrandr --output DP-1-2 --brightness 1
 
