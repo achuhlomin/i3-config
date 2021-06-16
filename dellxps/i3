@@ -12,7 +12,7 @@
 # is used in the bar {} block below.
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:Noto Sans Regular 10
+font pango:Noto Sans Regular 11
 
 # set the mod key to the winkey:
 set $mod Mod4
@@ -263,7 +263,7 @@ bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
-bindsym $mod+g layout tabbed
+bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
@@ -301,7 +301,7 @@ bindsym Shift+XF86MonBrightnessUp exec --no-startup-id xrandr --output eDP-1-1 -
 bindsym Shift+XF86MonBrightnessDown exec --no-startup-id xrandr --output eDP-1-1 --brightness $(echo "$(bc <<< "$(xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1) - 0.01") 0.1" | tr ' ' "\n" | sort -nr | head -1) && pkill -RTMIN+13 i3blocks
 bindsym $mod+Shift+XF86AudioRaiseVolume exec --no-startup-id xrandr --output DP-1-2 --brightness $(echo "$(bc <<< "$(xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1) + 0.01") 1" | tr ' ' "\n" | sort -n | head -1) && pkill -RTMIN+13 i3blocks
 bindsym $mod+Shift+XF86AudioLowerVolume exec --no-startup-id xrandr --output DP-1-2 --brightness $(echo "$(bc <<< "$(xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1) - 0.01") 0.1" | tr ' ' "\n" | sort -nr | head -1) && pkill -RTMIN+13 i3blocks
-bindsym $mod+XF86AudioMute --release exec --no-startup-id "xset dpms force off"
+bindsym $mod+XF86AudioMute --release exec --no-startup-id "sleep 1; xset dpms force off"
 
 # volume
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks
@@ -454,7 +454,7 @@ exec --no-startup-id gxkb
 exec --no-startup-id /opt/enpass/Enpass -minimize
 exec_always --no-startup-id sleep 7; birdtray
 # see also keyboard-g213-highlight.service
-exec_always --no-startup-id "g213-led -a 3e7ab3"
+exec_always --no-startup-id "g213-led -a 00ff00"
 exec_always --no-startup-id xrandr --output eDP-1-1 --brightness 1
 exec_always --no-startup-id xrandr --output DP-1-2 --brightness 1
 
@@ -511,7 +511,7 @@ bar {
   status_command i3blocks -c ~/.config/i3/i3blocks.conf
   #i3bar_command i3bar --transparency
   position bottom 
-  font pango:Noto Sans Regular 10, FontAwesome 10
+  font pango:Noto Sans Regular 11, FontAwesome 11
   
   # it could be that you have no primary display set: set one (xrandr --output <output> --primary)
   # reference: https://i3wm.org/docs/userguide.html#_tray_output
@@ -547,7 +547,7 @@ bar {
   status_command i3blocks -c ~/.config/i3/i3blocks.conf
   #i3bar_command i3bar --transparency
   position bottom
-  font pango:Noto Sans Regular 10, FontAwesome 10
+  font pango:Noto Sans Regular 11, FontAwesome 11
   
   # it could be that you have no primary display set: set one (xrandr --output <output> --primary)
   # reference: https://i3wm.org/docs/userguide.html#_tray_output
@@ -598,7 +598,7 @@ bindsym $mod+d exec rofi -modi drun -show drun -display-drun "Apps" -line-paddin
   -lines 18 -columns 2 -padding 24 -hide-scrollbar \
   -show-icons -drun-icon-theme "Arc-X-D" -font "Noto Sans Regular 11"
 
-bindsym $mod+w exec rofi -show window -display-window "Window" -line-padding 4 \
+bindsym $mod+g exec rofi -show window -display-window "Window" -line-padding 4 \
   -lines 12 -padding 24 -hide-scrollbar \
   -show-icons -drun-icon-theme "Arc-X-D" -font "Noto Sans Regular 11"
                 
