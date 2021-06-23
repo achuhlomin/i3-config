@@ -4,9 +4,9 @@
 # Please see http://i3wm.org/docs/userguide.html for the official i3 reference!
 
 
-#######################
-# config starts here: #
-#######################
+######################
+# Config starts here #
+######################
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -20,7 +20,7 @@ set $alt Mod1
 
 
 ################
-# mouse setup: #
+# Mouse setup #
 ################
 # xinput list
 # xinput list-props 12
@@ -30,9 +30,9 @@ exec_always --no-startup-id xinput set-prop "$(xinput list | grep 'Logitech USB 
 exec_always --no-startup-id xinput set-prop "$(xinput list | grep 'Logitech USB Optical Mouse' | awk '{print $7}' | tr -d 'id=')" "$(xinput list-props "$(xinput list | grep 'Logitech USB Optical Mouse' | awk '{print $7}' | sed 's/id=//')" | grep 'libinput Accel Profile Enabled (' | awk '{print $5}' | tr -d [:punct:])" 0, 1
 
 
-#####################
-# workspace layout: #
-#####################
+####################
+# Workspace layout #
+####################
 
 # default i3 tiling mode:
 workspace_layout default
@@ -46,9 +46,9 @@ workspace_layout default
 #workspace_layout tabbed
 
 
-##############################
-# extra options for windows: #
-##############################
+#############################
+# Extra options for windows #
+#############################
 
 #border indicator on windows: 
 new_window pixel 2
@@ -71,6 +71,11 @@ smart_borders on
 floating_modifier $mod
 
 focus_follows_mouse no
+
+
+###########################
+# Keybindings for windows #
+###########################
 
 # switch to workspace
 bindsym $mod+1    workspace  $ws1
@@ -207,7 +212,7 @@ bindsym $mod+r mode "resize"
 
 
 ######################################
-# keybindings for different actions: #
+# Keybindings for different actions: #
 ######################################
 
 # start a terminal
@@ -288,20 +293,10 @@ bindsym $mod+minus scratchpad show
 # open new empty workspace
 bindsym $mod+Shift+n exec ~/.config/i3/scripts/empty_workspace.sh
 
-## Multimedia Keys
 
-# brightness control
-bindsym XF86MonBrightnessUp exec --no-startup-id xrandr --output eDP-1-1 --brightness $(echo "$(bc <<< "$(xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1) + 0.1") 1" | tr ' ' "\n" | sort -n | head -1) && pkill -RTMIN+13 i3blocks
-bindsym XF86MonBrightnessDown exec --no-startup-id xrandr --output eDP-1-1 --brightness $(echo "$(bc <<< "$(xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1) - 0.1") 0.1" | tr ' ' "\n" | sort -nr | head -1) && pkill -RTMIN+13 i3blocks
-bindsym $mod+XF86AudioRaiseVolume exec --no-startup-id xrandr --output DP-1-2 --brightness $(echo "$(bc <<< "$(xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1) + 0.1") 1" | tr ' ' "\n" | sort -n | head -1) && pkill -RTMIN+13 i3blocks
-bindsym $mod+XF86AudioLowerVolume exec --no-startup-id xrandr --output DP-1-2 --brightness $(echo "$(bc <<< "$(xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1) - 0.1") 0.1" | tr ' ' "\n" | sort -nr | head -1) && pkill -RTMIN+13 i3blocks
-
-# gradular brightness control
-bindsym Shift+XF86MonBrightnessUp exec --no-startup-id xrandr --output eDP-1-1 --brightness $(echo "$(bc <<< "$(xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1) + 0.01") 1" | tr ' ' "\n" | sort -n | head -1) && pkill -RTMIN+13 i3blocks
-bindsym Shift+XF86MonBrightnessDown exec --no-startup-id xrandr --output eDP-1-1 --brightness $(echo "$(bc <<< "$(xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1) - 0.01") 0.1" | tr ' ' "\n" | sort -nr | head -1) && pkill -RTMIN+13 i3blocks
-bindsym $mod+Shift+XF86AudioRaiseVolume exec --no-startup-id xrandr --output DP-1-2 --brightness $(echo "$(bc <<< "$(xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1) + 0.01") 1" | tr ' ' "\n" | sort -n | head -1) && pkill -RTMIN+13 i3blocks
-bindsym $mod+Shift+XF86AudioLowerVolume exec --no-startup-id xrandr --output DP-1-2 --brightness $(echo "$(bc <<< "$(xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1) - 0.01") 0.1" | tr ' ' "\n" | sort -nr | head -1) && pkill -RTMIN+13 i3blocks
-bindsym $mod+XF86AudioMute --release exec --no-startup-id "sleep 1; xset dpms force off"
+########################################
+# Keybindings for different multimedia #
+########################################
 
 # volume
 bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks
@@ -314,15 +309,29 @@ bindsym Shift+XF86AudioLowerVolume exec --no-startup-id amixer -D pulse sset Mas
 # mute
 bindsym XF86AudioMute exec --no-startup-id amixer -D pulse sset Master toggle && pkill -RTMIN+1 i3blocks
 
+# redirect sound to headphones
+bindsym $mod+p exec /usr/local/bin/switch-audio-port
+
+# media
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 bindsym XF86AudioStop exec --no-startup-id playerctl pause
 bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 
-# redirect sound to headphones
-bindsym $mod+p exec /usr/local/bin/switch-audio-port
+# brightness control
+bindsym XF86MonBrightnessUp exec --no-startup-id xrandr --output eDP-1-1 --brightness $(echo "$(bc <<< "$(xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1) + 0.1") 1" | tr ' ' "\n" | sort -n | head -1) && pkill -RTMIN+2 i3blocks
+bindsym XF86MonBrightnessDown exec --no-startup-id xrandr --output eDP-1-1 --brightness $(echo "$(bc <<< "$(xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1) - 0.1") 0.1" | tr ' ' "\n" | sort -nr | head -1) && pkill -RTMIN+2 i3blocks
+bindsym $mod+XF86AudioRaiseVolume exec --no-startup-id xrandr --output DP-1-2 --brightness $(echo "$(bc <<< "$(xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1) + 0.1") 1" | tr ' ' "\n" | sort -n | head -1) && pkill -RTMIN+2 i3blocks
+bindsym $mod+XF86AudioLowerVolume exec --no-startup-id xrandr --output DP-1-2 --brightness $(echo "$(bc <<< "$(xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1) - 0.1") 0.1" | tr ' ' "\n" | sort -nr | head -1) && pkill -RTMIN+2 i3blocks
 
-## screenshot
+# gradular brightness control
+bindsym Shift+XF86MonBrightnessUp exec --no-startup-id xrandr --output eDP-1-1 --brightness $(echo "$(bc <<< "$(xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1) + 0.01") 1" | tr ' ' "\n" | sort -n | head -1) && pkill -RTMIN+2 i3blocks
+bindsym Shift+XF86MonBrightnessDown exec --no-startup-id xrandr --output eDP-1-1 --brightness $(echo "$(bc <<< "$(xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1) - 0.01") 0.1" | tr ' ' "\n" | sort -nr | head -1) && pkill -RTMIN+2 i3blocks
+bindsym $mod+Shift+XF86AudioRaiseVolume exec --no-startup-id xrandr --output DP-1-2 --brightness $(echo "$(bc <<< "$(xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1) + 0.01") 1" | tr ' ' "\n" | sort -n | head -1) && pkill -RTMIN+2 i3blocks
+bindsym $mod+Shift+XF86AudioLowerVolume exec --no-startup-id xrandr --output DP-1-2 --brightness $(echo "$(bc <<< "$(xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1) - 0.01") 0.1" | tr ' ' "\n" | sort -nr | head -1) && pkill -RTMIN+2 i3blocks
+bindsym $mod+XF86AudioMute --release exec --no-startup-id "sleep 1; xset dpms force off"
+
+# screenshots
 bindsym Print exec --no-startup-id flameshot full --path ~/Screenshots/
 bindsym Ctrl+Print exec --no-startup-id flameshot full --clipboard
 bindsym $mod+Print exec --no-startup-id flameshot gui --path ~/Screenshots/
@@ -330,17 +339,21 @@ bindsym Shift+Print exec --no-startup-id flameshot full --path ~/Screenshots/ --
 bindsym Shift+Ctrl+Print exec --no-startup-id flameshot full --clipboard --delay 3500
 bindsym Shift+$mod+Print exec --no-startup-id flameshot gui --path ~/Screenshots/ --delay 3500
 
-## obs
+# obs
 bindsym $mod+F7 exec --no-startup-id obs --minimize-to-tray
 bindsym $mod+End exec --no-startup-id killall obs
 
-## autorandr
+# autorandr
 bindsym $mod+F9 exec --no-startup-id autorandr --load desktop-only-nvidia
 bindsym $mod+F10 exec --no-startup-id autorandr --load desktop-main-nvidia
 bindsym $mod+F11 exec --no-startup-id autorandr --load laptop-only-nvidia
 bindsym $mod+F12 exec --no-startup-id autorandr --load laptop-main-nvidia
 
-## app shortcuts
+
+##################################
+# Keybindings for different apps #
+##################################
+
 bindsym $mod+F1 exec --no-startup-id idea
 bindsym $mod+F2 exec --no-startup-id firefox
 bindsym $mod+F3 exec --no-startup-id google-chrome-stable
@@ -355,11 +368,12 @@ bindsym $mod+x exec --no-startup-id wmfocus
 bindsym $mod+z exec --no-startup-id dunstctl history-pop
 bindsym $alt+Ctrl+space exec --no-startup-id dunstctl close-all
 bindsym $mod+Insert exec --no-startup-id nmcli con up id IDT
+bindsym $mod+Delete exec --no-startup-id nmcli con down id IDT
 
 
-##########################################
-# configuration for workspace behaviour: #
-##########################################
+#########################################
+# Configuration for workspace behaviour #
+#########################################
 
 # define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -389,7 +403,7 @@ workspace $ws8 output nonprimary
 workspace $ws9 output primary
 workspace $ws10 output primary
 
-## bind program to workspace and focus to them on startup:
+# bind program to workspace and focus to them on startup:
 assign [class="jetbrains-*"] $ws1
 assign [class="firefox"] $ws2
 assign [class="qutebrowser"] $ws2
@@ -408,11 +422,11 @@ for_window [class=Thunderbird] focus
 for_window [class=TelegramDesktop] focus
 
 
-#############################################
-# autostart applications/services on login: #
-#############################################
+############################################
+# Autostart applications/services on login #
+############################################
 
-#get auth work with polkit-gnome
+# get auth work with polkit-gnome
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 # dex execute .desktop files
@@ -449,7 +463,7 @@ exec --no-startup-id xset s 480 dpms 600 600 600
 # desktop notifications
 exec --no-startup-id dbus-launch dunst --config ~/.config/dunst/dunstrc
 
-## autostart apps as you like
+# autostart apps as you like
 exec --no-startup-id gxkb
 exec --no-startup-id /opt/enpass/Enpass -minimize
 exec_always --no-startup-id sleep 7; birdtray
@@ -458,7 +472,11 @@ exec_always --no-startup-id "g213-led -a 00ff00"
 exec_always --no-startup-id xrandr --output eDP-1-1 --brightness 1
 exec_always --no-startup-id xrandr --output DP-1-2 --brightness 1
 
-## setup window behavior
+
+#################
+# Setup windows #
+#################
+
 for_window [class="firefox"] layout tabbed
 for_window [class="Yad" instance="yad"] floating enable
 for_window [class="Galculator" instance="galculator"] floating enable
@@ -476,7 +494,7 @@ for_window [class="jetbrains-*" window_type="dialog" title="Copy"] floating enab
 
 
 ######################################
-# color settings for bar and windows #
+# Color settings for bar and windows #
 ######################################
  
 # define colors variables: 
@@ -500,9 +518,9 @@ client.focused_inactive  $darkblue  $darkblue  $grey    $purple    $black
 client.urgent        $urgentred  $urgentred  $white    $purple    $yellowbrown
 
 
-############################################
-# bar settings (input comes from i3blocks) #
-############################################
+################
+# Bar settings #
+################
 
 # start i3bar to display a workspace bar 
 # (plus the system information i3status finds out, if available)
@@ -587,9 +605,9 @@ bar {
 
 bindsym $mod+m bar mode toggle
 
-#####################################
-# menu handled by rofi: #
-#####################################
+########
+# Rofi #
+########
 
 # exit-menu
 bindsym $mod+Shift+e exec ~/.config/i3/scripts/shutdown_menu -p rofi -c
