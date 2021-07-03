@@ -8,15 +8,17 @@
 # Config starts here #
 ######################
 
+# set the mod key to the winkey:
+set $mod Mod4
+set $alt Mod1
+
+set $font_size 11
+
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:Noto Sans Regular 11
-
-# set the mod key to the winkey:
-set $mod Mod4
-set $alt Mod1
+font pango:Noto Sans Regular $font_size
 
 
 ################
@@ -57,7 +59,7 @@ new_window pixel 2
 #hide_edge_borders both
 
 # Set inner/outer gaps
-gaps inner 8
+gaps inner 4
 gaps outer 4
 
 # Smart gaps (gaps used if only more than one container on the workspace)
@@ -198,10 +200,14 @@ mode "resize" {
         bindsym ntilde resize grow width 10 px or 10 ppt
 
 # same bindings, but for the arrow keys
-  bindsym Left resize shrink width 10 px or 10 ppt
         bindsym Down resize grow height 10 px or 10 ppt
         bindsym Up resize shrink height 10 px or 10 ppt
         bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Shift+Down resize grow height 1 px
+        bindsym Shift+Up resize shrink height 1 px
+        bindsym Shift+Right resize grow width 1 px
+        bindsym Shift+Left resize shrink width 1 px
 
 # back to normal: Enter or Escape
   bindsym Return mode "default"
@@ -356,7 +362,9 @@ bindsym $mod+F12 exec --no-startup-id autorandr --load laptop-main-nvidia
 
 bindsym $mod+F1 exec --no-startup-id idea
 bindsym $mod+F2 exec --no-startup-id firefox
-bindsym $mod+F3 exec --no-startup-id google-chrome-stable
+bindsym $mod+Shift+F2 exec --no-startup-id google-chrome-stable
+bindsym $mod+F3 exec --no-startup-id google-chrome-unstable
+bindsym $mod+Shift+F3 exec --no-startup-id firefox-developer-edition
 bindsym $mod+F4 exec --no-startup-id thunderbird
 bindsym $mod+F5 exec --no-startup-id slack
 bindsym $mod+F6 exec --no-startup-id thunar
@@ -405,15 +413,24 @@ workspace $ws10 output primary
 
 # bind program to workspace and focus to them on startup:
 assign [class="jetbrains-*"] $ws1
-assign [class="firefox"] $ws2
+
+assign [class="^firefox$"] $ws2
 assign [class="qutebrowser"] $ws2
-assign [class="chrome"] $ws3
+assign [class="^Google-chrome$"] $ws2
+
+assign [class="^firefoxdeveloperedition$"] $ws3
+assign [class="^Google-chrome-unstable$"] $ws3
+
+for_window [title="Emulator"] move to workspace $ws3
+for_window [title="Android Emulator - Pixel_3a_API_29:5554"] move to workspace $ws3
+
 assign [class="Thunderbird"] $ws4
 assign [class="Slack"] $ws5
 assign [class="TelegramDesktop"] $ws5
 assign [class="Thunar"] $ws6
 assign [class="obs"] $ws7
 for_window [class="Spotify"] move to workspace $ws7
+assign [class="Anki"] $ws9
 assign [class="Xfce4-terminal"] $ws10
 
 # automatic set focus new window if it opens on another workspace then the current:
@@ -483,6 +500,9 @@ for_window [class="Galculator" instance="galculator"] floating enable
 #for_window [class=Xfce4-terminal] floating enable
 for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
 
+for_window [title="Emulator"] floating enable
+for_window [title="Android Emulator - Pixel_3a_API_29:5554"] floating enable
+
 # jetbrains
 for_window [class="jetbrains-*"] layout tabbed
 for_window [class="jetbrains-*"] floating disable
@@ -529,7 +549,7 @@ bar {
   status_command i3blocks -c ~/.config/i3/i3blocks.conf
   #i3bar_command i3bar --transparency
   position bottom 
-  font pango:Noto Sans Regular 11, FontAwesome 11
+  font pango:Noto Sans Regular $font_size, FontAwesome $font_size
   
   # it could be that you have no primary display set: set one (xrandr --output <output> --primary)
   # reference: https://i3wm.org/docs/userguide.html#_tray_output
@@ -565,7 +585,7 @@ bar {
   status_command i3blocks -c ~/.config/i3/i3blocks.conf
   #i3bar_command i3bar --transparency
   position bottom
-  font pango:Noto Sans Regular 11, FontAwesome 11
+  font pango:Noto Sans Regular $font_size, FontAwesome $font_size
   
   # it could be that you have no primary display set: set one (xrandr --output <output> --primary)
   # reference: https://i3wm.org/docs/userguide.html#_tray_output
@@ -614,12 +634,12 @@ bindsym $mod+Shift+e exec ~/.config/i3/scripts/shutdown_menu -p rofi -c
 
 bindsym $mod+d exec rofi -modi drun -show drun -display-drun "Apps" -line-padding 4 \
   -lines 18 -columns 2 -padding 24 -hide-scrollbar \
-  -show-icons -drun-icon-theme "Arc-X-D" -font "Noto Sans Regular 11"
+  -show-icons -drun-icon-theme "Arc-X-D" -font "Noto Sans Regular $font_size"
 
-bindsym $mod+g exec rofi -show window -display-window "Window" -line-padding 4 \
+bindsym $mod+q exec rofi -show window -display-window "Window" -line-padding 4 \
   -lines 12 -padding 24 -hide-scrollbar \
-  -show-icons -drun-icon-theme "Arc-X-D" -font "Noto Sans Regular 11"
+  -show-icons -drun-icon-theme "Arc-X-D" -font "Noto Sans Regular $font_size"
                 
 bindsym $alt+Ctrl+v exec --no-startup-id CM_LAUNCHER=rofi CM_HISTLENGTH=24 clipmenu -p 'Clipboard' -line-padding 2 \
   -padding 24 -hide-scrollbar \
-  -show-icons -drun-icon-theme "Arc-X-D" -font "Noto Sans Regular 11"
+  -show-icons -drun-icon-theme "Arc-X-D" -font "Noto Sans Regular $font_size"
