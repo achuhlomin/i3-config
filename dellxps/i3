@@ -12,7 +12,7 @@
 set $mod Mod4
 set $alt Mod1
 
-set $font_size 11
+set $font_size 12
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -53,7 +53,7 @@ workspace_layout default
 #############################
 
 #border indicator on windows: 
-new_window pixel 2
+default_border pixel 3
 
 # thin borders
 #hide_edge_borders both
@@ -325,17 +325,17 @@ bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 
 # brightness control
-bindsym XF86MonBrightnessUp exec --no-startup-id xrandr --output eDP-1-1 --brightness $(echo "$(bc <<< "$(xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1) + 0.1") 1" | tr ' ' "\n" | sort -n | head -1) && pkill -RTMIN+2 i3blocks
-bindsym XF86MonBrightnessDown exec --no-startup-id xrandr --output eDP-1-1 --brightness $(echo "$(bc <<< "$(xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1) - 0.1") 0.1" | tr ' ' "\n" | sort -nr | head -1) && pkill -RTMIN+2 i3blocks
-bindsym $mod+XF86AudioRaiseVolume exec --no-startup-id xrandr --output DP-1-2 --brightness $(echo "$(bc <<< "$(xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1) + 0.1") 1" | tr ' ' "\n" | sort -n | head -1) && pkill -RTMIN+2 i3blocks
-bindsym $mod+XF86AudioLowerVolume exec --no-startup-id xrandr --output DP-1-2 --brightness $(echo "$(bc <<< "$(xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1) - 0.1") 0.1" | tr ' ' "\n" | sort -nr | head -1) && pkill -RTMIN+2 i3blocks
+bindsym XF86MonBrightnessUp exec --no-startup-id xrandr --output eDP-1-1 --brightness $(echo "$(bc <<< "$(xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1) + 0.05") 1" | tr ' ' "\n" | sort -n | head -1) && pkill -RTMIN+2 i3blocks
+bindsym XF86MonBrightnessDown exec --no-startup-id xrandr --output eDP-1-1 --brightness $(echo "$(bc <<< "$(xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1) - 0.05") 0.1" | tr ' ' "\n" | sort -nr | head -1) && pkill -RTMIN+2 i3blocks
+bindsym $alt+XF86AudioRaiseVolume exec --no-startup-id xrandr --output DP-1-2 --brightness $(echo "$(bc <<< "$(xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1) + 0.05") 1" | tr ' ' "\n" | sort -n | head -1) && pkill -RTMIN+2 i3blocks
+bindsym $alt+XF86AudioLowerVolume exec --no-startup-id xrandr --output DP-1-2 --brightness $(echo "$(bc <<< "$(xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1) - 0.05") 0.1" | tr ' ' "\n" | sort -nr | head -1) && pkill -RTMIN+2 i3blocks
 
 # gradular brightness control
 bindsym Shift+XF86MonBrightnessUp exec --no-startup-id xrandr --output eDP-1-1 --brightness $(echo "$(bc <<< "$(xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1) + 0.01") 1" | tr ' ' "\n" | sort -n | head -1) && pkill -RTMIN+2 i3blocks
 bindsym Shift+XF86MonBrightnessDown exec --no-startup-id xrandr --output eDP-1-1 --brightness $(echo "$(bc <<< "$(xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1) - 0.01") 0.1" | tr ' ' "\n" | sort -nr | head -1) && pkill -RTMIN+2 i3blocks
-bindsym $mod+Shift+XF86AudioRaiseVolume exec --no-startup-id xrandr --output DP-1-2 --brightness $(echo "$(bc <<< "$(xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1) + 0.01") 1" | tr ' ' "\n" | sort -n | head -1) && pkill -RTMIN+2 i3blocks
-bindsym $mod+Shift+XF86AudioLowerVolume exec --no-startup-id xrandr --output DP-1-2 --brightness $(echo "$(bc <<< "$(xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1) - 0.01") 0.1" | tr ' ' "\n" | sort -nr | head -1) && pkill -RTMIN+2 i3blocks
-bindsym $mod+XF86AudioMute --release exec --no-startup-id "sleep 1; xset dpms force off"
+bindsym $alt+Shift+XF86AudioRaiseVolume exec --no-startup-id xrandr --output DP-1-2 --brightness $(echo "$(bc <<< "$(xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1) + 0.01") 1" | tr ' ' "\n" | sort -n | head -1) && pkill -RTMIN+2 i3blocks
+bindsym $alt+Shift+XF86AudioLowerVolume exec --no-startup-id xrandr --output DP-1-2 --brightness $(echo "$(bc <<< "$(xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1) - 0.01") 0.1" | tr ' ' "\n" | sort -nr | head -1) && pkill -RTMIN+2 i3blocks
+bindsym $alt+XF86AudioMute --release exec --no-startup-id "sleep 1; xset dpms force off"
 
 # screenshots
 bindsym Print exec --no-startup-id flameshot full --path ~/Screenshots/
@@ -362,9 +362,9 @@ bindsym $mod+F12 exec --no-startup-id autorandr --load laptop-main-nvidia
 
 bindsym $mod+F1 exec --no-startup-id idea
 bindsym $mod+F2 exec --no-startup-id firefox
-bindsym $mod+Shift+F2 exec --no-startup-id google-chrome-stable
-bindsym $mod+F3 exec --no-startup-id google-chrome-unstable
-bindsym $mod+Shift+F3 exec --no-startup-id firefox-developer-edition
+bindsym $mod+Shift+F2 exec --no-startup-id firefox-developer-edition
+bindsym $mod+F3 exec --no-startup-id google-chrome-stable
+bindsym $mod+Shift+F3 exec --no-startup-id google-chrome-unstable
 bindsym $mod+F4 exec --no-startup-id thunderbird
 bindsym $mod+F5 exec --no-startup-id slack
 bindsym $mod+F6 exec --no-startup-id thunar
@@ -415,10 +415,10 @@ workspace $ws10 output primary
 assign [class="jetbrains-*"] $ws1
 
 assign [class="^firefox$"] $ws2
+assign [class="^firefoxdeveloperedition$"] $ws2
 assign [class="qutebrowser"] $ws2
-assign [class="^Google-chrome$"] $ws2
 
-assign [class="^firefoxdeveloperedition$"] $ws3
+assign [class="^Google-chrome$"] $ws3
 assign [class="^Google-chrome-unstable$"] $ws3
 
 for_window [title="Emulator"] move to workspace $ws3
@@ -487,7 +487,7 @@ exec_always --no-startup-id sleep 7; birdtray
 # see also keyboard-g213-highlight.service
 exec_always --no-startup-id "g213-led -a 00ff00"
 exec_always --no-startup-id xrandr --output eDP-1-1 --brightness 1
-exec_always --no-startup-id xrandr --output DP-1-2 --brightness 1
+exec_always --no-startup-id xrandr --output DP-1-2 --brightness 0.85
 
 
 #################
@@ -518,24 +518,24 @@ for_window [class="jetbrains-*" window_type="dialog" title="Copy"] floating enab
 ######################################
  
 # define colors variables: 
-set $darkbluetrans  #08052be6
-set $darkblue    #08052b
-set $lightblue    #5294e2
-set $urgentred    #e53935
-set $white    #ffffff
-set $black    #000000
-set $purple    #e345ff
-set $darkgrey    #383c4a
-set $grey    #b0b5bd
-set $mediumgrey    #8b8b8b
-set $yellowbrown  #e1b700
+set $darkbluetrans    #08052be6
+set $darkblue         #08052b
+set $lightblue        #5294e2
+set $urgentred        #e53935
+set $white            #ffffff
+set $black            #000000
+set $purple           #e345ff
+set $darkgrey         #18181a
+set $grey             #b0b5bd
+set $mediumgrey       #8b8b8b
+set $yellowbrown      #e1b700
 
 # define colors for windows:
-#class              border    bground    text    indicator  child_border
-client.focused        $lightblue  $darkblue  $white    $purple    $mediumgrey
-client.unfocused      $darkblue  $darkblue  $grey    $purple    $darkgrey
-client.focused_inactive  $darkblue  $darkblue  $grey    $purple    $black
-client.urgent        $urgentred  $urgentred  $white    $purple    $yellowbrown
+#class                    border        bground       text        indicator   child_border
+client.focused            $lightblue    $lightblue    $darkblue   $purple     $lightblue
+client.unfocused          $darkblue     $darkblue     $grey       $purple     $darkgrey
+client.focused_inactive   $darkblue     $darkblue     $grey       $purple     $black
+client.urgent             $urgentred    $urgentred    $white      $purple     $yellowbrown
 
 
 ################
