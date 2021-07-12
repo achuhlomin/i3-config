@@ -12,13 +12,13 @@
 set $mod Mod4
 set $alt Mod1
 
-set $font_size 12
+set $font_size 11.7
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:Noto Sans Regular $font_size
+font pango:Source Code Pro $font_size
 
 
 ################
@@ -63,7 +63,7 @@ gaps inner 4
 gaps outer 4
 
 # Smart gaps (gaps used if only more than one container on the workspace)
-#smart_gaps on
+smart_gaps on
 
 # Smart borders (draw borders around container only if it is not the only container on this workspace)
 # on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
@@ -385,17 +385,16 @@ bindsym $mod+Delete exec --no-startup-id nmcli con down id IDT
 
 # define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws0  "0:"
-set $ws1  "1:"
-set $ws2  "2:"
-set $ws3  "3:"
-set $ws4  "4:"
-set $ws5  "5:"
-set $ws6  "6:"
-set $ws7  "7:"
-set $ws8  "8:"
-set $ws9  "9:"
-set $ws10 "10:"
+set $ws1  "1: "
+set $ws2  "2: "
+set $ws3  "3: "
+set $ws4  "4: "
+set $ws5  "5: "
+set $ws6  "6: "
+set $ws7  "7: "
+set $ws8  "8: "
+set $ws9  "9: "
+set $ws10 "10: "
 
 # use workspaces on different displays:
 # where you have to replace VGA-0/HDMI-0 with the names for your displays 
@@ -549,7 +548,7 @@ bar {
   status_command i3blocks -c ~/.config/i3/i3blocks.conf
   #i3bar_command i3bar --transparency
   position bottom 
-  font pango:Noto Sans Regular $font_size, FontAwesome $font_size
+  font pango:Source Code Pro $font_size, FontAwesome $font_size
   
   # it could be that you have no primary display set: set one (xrandr --output <output> --primary)
   # reference: https://i3wm.org/docs/userguide.html#_tray_output
@@ -559,7 +558,7 @@ bar {
   # when strip_workspace_numbers is set to yes, 
   # any workspace that has a name of the form 
   # “[n][:][NAME]” will display only the name.
-  strip_workspace_numbers yes
+  #strip_workspace_numbers yes
   #strip_workspace_name no
 
   colors {
@@ -585,7 +584,7 @@ bar {
   status_command i3blocks -c ~/.config/i3/i3blocks.conf
   #i3bar_command i3bar --transparency
   position bottom
-  font pango:Noto Sans Regular $font_size, FontAwesome $font_size
+  font pango:Source Code Pro $font_size, FontAwesome $font_size
   
   # it could be that you have no primary display set: set one (xrandr --output <output> --primary)
   # reference: https://i3wm.org/docs/userguide.html#_tray_output
@@ -634,12 +633,12 @@ bindsym $mod+Shift+e exec ~/.config/i3/scripts/shutdown_menu -p rofi -c
 
 bindsym $mod+d exec rofi -modi drun -show drun -display-drun "Apps" -line-padding 4 \
   -lines 18 -columns 2 -padding 24 -hide-scrollbar \
-  -show-icons -drun-icon-theme "Arc-X-D" -font "Noto Sans Regular $font_size"
+  -show-icons -drun-icon-theme "Arc-X-D" -font "Source Code Pro $font_size"
 
 bindsym $mod+q exec rofi -show window -display-window "Window" -line-padding 4 \
   -lines 12 -padding 24 -hide-scrollbar \
-  -show-icons -drun-icon-theme "Arc-X-D" -font "Noto Sans Regular $font_size"
+  -show-icons -drun-icon-theme "Arc-X-D" -font "Source Code Pro $font_size"
                 
 bindsym $alt+Ctrl+v exec --no-startup-id CM_LAUNCHER=rofi CM_HISTLENGTH=24 clipmenu -p 'Clipboard' -line-padding 2 \
   -padding 24 -hide-scrollbar \
-  -show-icons -drun-icon-theme "Arc-X-D" -font "Noto Sans Regular $font_size"
+  -show-icons -drun-icon-theme "Arc-X-D" -font "Source Code Pro $font_size"
